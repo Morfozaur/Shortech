@@ -1,0 +1,77 @@
+.in-editor {
+  background-color: $color-second;
+}
+
+.post-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  &-header {
+    height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-title {
+    height: 24px;
+    width: 220px;
+    font-size: 1.5rem;
+    text-align: left;
+  }
+  .date-selector {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    > * {
+      height: 24px;
+      line-height: 24px;
+      margin-left: .2em;
+    }
+    .day, .month {
+      width: 30px;
+    }
+    .year {
+      width: 50px;
+    }
+  }
+
+  .add-tag {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    height: 21px;
+    .tag-input {
+      height: 21px;
+      width: 120px;
+    }
+  }
+
+  //.btn.tags-single {
+  //  display: flex;
+  //  gap:.5em;
+  //  align-items: center;
+  //  background-color: $color-third-dark;
+  //  padding: 0 .5em;
+  //  transform: none;
+  //  .tag-input {
+  //    font-size: 1.3em;
+  //    border-radius: 5px;
+  //    background-color: $color-third;
+  //    &:focus {
+  //      outline: none;
+  //      border:none;
+  //      background-color: white;
+  //    }
+  //  }
+  //  .add-tag {
+  //    color: $color-second;
+  //  }
+  //}
+
+
+
+  &-text {
+
+  }
+}

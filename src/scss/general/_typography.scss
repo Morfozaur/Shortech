@@ -6,6 +6,7 @@ body {
 
 h1, h2, h3 {
   font-family: Staatliches,sans-serif;
+  color: $color-third-dark;
 }
 
 h1 {
@@ -18,4 +19,9 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
+}
+
+p {
+  color: $color-third-dark;
+  line-height: 1.2em;
 }

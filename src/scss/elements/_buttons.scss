@@ -6,10 +6,10 @@
   padding: .3em .8em;
   border: 1px solid $color-third-dark;
   border-radius: 15px;
-  &-edit {
-    position: absolute;
-    transform: translate(-50%, 50%);
-    bottom:0;
-    left:50%;
+  &-post {
+    width: 80px;
+  }
+  &:active {
+    transform: scale(.95);
   }
 }
