@@ -1,0 +1,9 @@
+.logo {
+  user-select: none;
+  font-family: Staatliches, sans-serif;
+  color: $color-third;
+  span {
+    color: white;
+    -webkit-text-stroke: 1px $color-third;
+  }
+}

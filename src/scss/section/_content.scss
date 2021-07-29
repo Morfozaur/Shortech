@@ -1,0 +1,11 @@
+.content-section {
+  width: 100%;
+  padding: 0 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  .add-new {
+    color: $color-third-dark;
+  }
+}

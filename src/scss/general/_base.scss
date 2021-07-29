@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: $color-base;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+  &:active {
+    text-decoration: underline;
+  }
+}

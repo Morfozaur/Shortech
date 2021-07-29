@@ -2,8 +2,21 @@ import React from 'react';
 
 const Menu = () => {
     return (
-        <menu></menu>
+        <menu className='main-menu'>
+            <ul className='main-menu-list'>
+                <li><i className="fas fa-home"/></li>
+                <li>Gaming</li>
+                <li>Nauka</li>
+            </ul>
+            <div className='main-menu-user'>
+                <form>
+                    <input type="text" className="search inactive" placeholder='Wpisz wyszukiwaną frazę...'/>
+                    <i className="fas fa-search"/>
+                </form>
+                <i className="fas fa-user"/>
+            </div>
+        </menu>
     );
 }
 
-export default Menu;
+export default Menu

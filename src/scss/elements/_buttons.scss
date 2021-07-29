@@ -1,0 +1,15 @@
+.btn {
+  background: $color-third-dark;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: .3em .8em;
+  border: 1px solid $color-third-dark;
+  border-radius: 15px;
+  &-edit {
+    position: absolute;
+    transform: translate(-50%, 50%);
+    bottom:0;
+    left:50%;
+  }
+}

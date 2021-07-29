@@ -1,2 +1,15 @@
-@import "./config/reset";
-@import "./config/_base";
+@import "general/reset";
+@import "general/colors";
+@import "general/typography";
+@import "general/base";
+
+@import "elements/logo";
+@import "elements/menu";
+@import "elements/buttons";
+
+@import "section/container";
+@import "section/header";
+@import "section/content";
+
+@import "elements/post";
+

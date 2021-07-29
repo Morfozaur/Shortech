@@ -1,9 +1,11 @@
 import React from 'react';
+import Menu from "./Menu";
 
 const Header = () => {
     return (
-        <header>
-            <h1>Shorty</h1>
+        <header className='header'>
+            <h1 className='logo'>SHOR<span>TECH</span></h1>
+            <Menu/>
         </header>
     );
 }
