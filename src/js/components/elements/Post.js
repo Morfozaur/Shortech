@@ -7,6 +7,7 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
     const [editor, setEditor] = useState(false);
     const [postClass, setPostClass] = useState('post')
     const [editBtn, setEditBtn] = useState("Edytuj");
+    const [textareaHeight, setTextareaHeight] = useState(0)
 
     const [newTitle, setNewTitle] = useState(title);
     const [newTags, setNewTags] = useState(tags);
@@ -15,6 +16,10 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
     // console.log(title, text, img, tags, highlight)
 
     const changeEdit = (e) => {
+        if (!editor) {
+            const editHeight = e.target.parentElement.parentElement.querySelector('.post-text').offsetHeight +4;
+            setTextareaHeight(editHeight);
+        }
         e.preventDefault();
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
@@ -38,10 +43,13 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
                                    newText={newText}
                                    setNewText={setNewText}
                                    newDate={newDate}
-                                   setNewDate={setNewDate}/>}
+                                   setNewDate={setNewDate}
+                                   textareaHeight={textareaHeight}/>}
 
             </div>
-            <img src={img} alt="title" className='post-img'/>
+            <div className='post-img'>
+                <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>
+            </div>
             <div className="post-buttons">
                 {editor && <button className="btn btn-post">Zdjęcie</button>}
                 <button className="btn btn-post" onClick={e=>changeEdit(e)}>{editBtn}</button>
@@ -49,6 +57,6 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
             </div>
         </div>
     );
-};
+}
 
 export default Post

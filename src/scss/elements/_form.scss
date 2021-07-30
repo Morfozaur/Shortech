@@ -17,8 +17,7 @@ textarea {
   font-family: Raleway, sans-serif;
   line-height: 1.2em;
   color: $color-third-dark;
-  min-height:123px;
-  height: auto;
+  min-height: 100%;
   resize: vertical;
   padding: 0;
   &:focus {

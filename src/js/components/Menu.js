@@ -5,8 +5,8 @@ const Menu = () => {
         <menu className='main-menu'>
             <ul className='main-menu-list'>
                 <li><i className="fas fa-home"/></li>
-                <li>Gaming</li>
-                <li>Nauka</li>
+                <li>Gry</li>
+                <li>Technologia</li>
             </ul>
             <div className='main-menu-user'>
                 <form>

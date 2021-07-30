@@ -45,33 +45,26 @@
       height: 21px;
       width: 120px;
     }
+    &-ico {
+      color: $color-third;
+    }
+  }
+  &-text {
   }
 
-  //.btn.tags-single {
-  //  display: flex;
-  //  gap:.5em;
-  //  align-items: center;
-  //  background-color: $color-third-dark;
-  //  padding: 0 .5em;
-  //  transform: none;
-  //  .tag-input {
-  //    font-size: 1.3em;
-  //    border-radius: 5px;
-  //    background-color: $color-third;
-  //    &:focus {
-  //      outline: none;
-  //      border:none;
-  //      background-color: white;
-  //    }
-  //  }
-  //  .add-tag {
-  //    color: $color-second;
-  //  }
-  //}
-
-
-
-  &-text {
-
+  @include tablet {
+    &-header {
+      min-height: 24px;
+      height: auto;
+      flex-direction: column;
+      align-items: flex-start;
+      .date-selector {
+        margin-top: .5em;
+        .day {
+          margin: 0;
+        }
+      }
+    }
   }
 }
+

@@ -23,4 +23,7 @@
       border: 2px solid $color-third-dark;
     }
   }
+  @include smart {
+    border-radius: 0;
+  }
 }

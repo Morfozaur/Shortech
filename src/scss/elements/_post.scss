@@ -7,12 +7,13 @@
   border: 1px solid $color-second;
   border-radius: 10px;
   padding: 1.2em;
-  &:nth-of-type(2){
+  &:nth-of-type(even){
     flex-direction: row-reverse;
     .post-date {
       text-align: right;
     }
   }
+
   &-content {
     width: 100%;
     min-height: 100%;
@@ -23,7 +24,6 @@
       display: flex;
       gap: 1em;
       flex-direction: column;
-
     }
     &-bottom {
      justify-self: flex-end;
@@ -34,6 +34,7 @@
     flex-wrap: wrap;
     gap: .6em;
     &-single {
+      user-select :none;
       background-color: $color-third;
       border-radius: 15px;
       text-transform: uppercase;
@@ -51,10 +52,27 @@
     color: $color-third;
   }
   &-img {
+    position: relative;
     height: 200px;
-    min-width: 300px;
+    width: 300px;
+    flex-shrink: 0;
     border: 1px solid $color-third;
     border-radius: 5px;
+    overflow: hidden;
+    &-file {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-size: cover;
+    }
+    @include tablet {
+      width: 100%;
+      height: 0;
+      padding-top: 66.66%;
+      flex-shrink: 1;
+    }
   }
   &-buttons {
     display: flex;
@@ -67,5 +85,20 @@
   .delete {
     background: $color-cancel;
     border-color: $color-cancel;
+  }
+  @include tablet {
+    width: calc(50% - 1em);
+    flex-direction: column-reverse;
+    flex-shrink: 1;
+    &:nth-of-type(even){
+      flex-direction: column-reverse;
+      .post-date {
+        text-align: left;
+      }
+    }
+  }
+  @include smart {
+    width: 100%;
+    margin: .5em 2em;
   }
 }
