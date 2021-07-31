@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PostContentMain from "./PostContentMain";
 import PostDate from "./PostDate";
 import PostContentEditor from "./PostContentEditor";
+import autosize from "autosize/dist/autosize";
 
-const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
+const Post = ({title, text, img, tags, highlight, date, createPost, updatePost}) => {
     const [editor, setEditor] = useState(false);
     const [postClass, setPostClass] = useState('post')
     const [editBtn, setEditBtn] = useState("Edytuj");
-    const [textareaHeight, setTextareaHeight] = useState(0)
+    const [currTextarea, setCurrTextarea] = useState('')
 
     const [newTitle, setNewTitle] = useState(title);
     const [newTags, setNewTags] = useState(tags);
@@ -15,12 +16,24 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
     const [newDate, setNewDate] = useState(date);
     // console.log(title, text, img, tags, highlight)
 
-    const changeEdit = (e) => {
-        if (!editor) {
-            const editHeight = e.target.parentElement.parentElement.querySelector('.post-text').offsetHeight +4;
-            setTextareaHeight(editHeight);
+    useEffect(()=> {
+        if(createPost) {
+            setEditor(true);
+            setPostClass('post in-editor');
         }
+    },[createPost])
+
+    useEffect(()=> {
+        if (editor && currTextarea) {
+            console.log(currTextarea)
+            const textArea = currTextarea.querySelector('textarea');
+            autosize.update(textArea);
+        }
+    },[currTextarea, editor])
+
+    const changeEdit = (e, resi) => {
         e.preventDefault();
+        setCurrTextarea(e.target.parentElement.parentElement)
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
@@ -32,7 +45,7 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
                 {!editor && (
                     <>
                         <PostContentMain title={title} tags={tags} text={text}/>
-                        <PostDate date={date}/>
+
                     </>
                 )}
                 {editor &&
@@ -43,9 +56,8 @@ const Post = ({title, text, img, tags, highlight, date, updatePost}) => {
                                    newText={newText}
                                    setNewText={setNewText}
                                    newDate={newDate}
-                                   setNewDate={setNewDate}
-                                   textareaHeight={textareaHeight}/>}
-
+                                   setNewDate={setNewDate}/>}
+                <PostDate date={date}/>
             </div>
             <div className='post-img'>
                 <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>

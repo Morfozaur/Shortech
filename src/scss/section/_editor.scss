@@ -3,9 +3,11 @@
 }
 
 .post-editor {
+  //min-height: 200px;
   display: flex;
   flex-direction: column;
   gap: 1em;
+  //margin-bottom: -.9em;
   &-header {
     height: 24px;
     display: flex;
@@ -50,6 +52,7 @@
     }
   }
   &-text {
+    //height: 121px;
   }
 
   @include tablet {
