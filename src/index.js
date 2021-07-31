@@ -2,6 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './js/components/App';
 import reportWebVitals from './reportWebVitals';
+import autosize from "autosize/dist/autosize";
+
+
+class AutoSize extends HTMLTextAreaElement {
+    constructor() {
+        super();
+        autosize(this);
+    }
+}
+
+customElements.define(
+    "auto-size",
+    AutoSize,
+    { extends: "textarea" }
+);
+
 
 ReactDOM.render(
   <React.StrictMode>

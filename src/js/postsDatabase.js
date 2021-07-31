@@ -6,7 +6,8 @@ const postDatabase = [
         tags: ['test', 'post', 'text'],
         highlight: false,
         id:1,
-        date:[29,7,2021]},
+        date:['2021-07-30T12:12']
+    },
     {
         title: "Post Testowy",
         text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur consectetur consequuntur delectus ducimus et nisi officia pariatur quaerat vero. Delectus.",
@@ -14,7 +15,7 @@ const postDatabase = [
         tags: ['test', 'post', 'text'],
         highlight: true,
         id:2,
-        date:[29,7,2021]
+        date:['2021-07-28T15:30']
     },
     {
         title: "Post Testowy",
@@ -23,7 +24,7 @@ const postDatabase = [
         tags: ['test', 'post', 'text'],
         highlight: false,
         id:3,
-        date:[29,7,2021]
+        date:['2021-07-29T08:12']
     },
     {
         title: "Post Testowy",
@@ -32,7 +33,7 @@ const postDatabase = [
         tags: ['test', 'post', 'text'],
         highlight: false,
         id:4,
-        date:[29,7,2021]
+        date:['2021-07-29T23:35']
     },
     {
         title: "Post Testowy",
@@ -41,7 +42,7 @@ const postDatabase = [
         tags: ['test', 'post', 'text'],
         highlight: false,
         id:5,
-        date:[29,7,2021]
+        date:['2021-07-29T12:34']
     }
 ]
 
