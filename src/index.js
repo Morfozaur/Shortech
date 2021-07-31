@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './js/components/App';
 import reportWebVitals from './reportWebVitals';
 import autosize from "autosize/dist/autosize";
-
+// import store from './js/store'
+// import { Provider } from 'react-redux'
 
 class AutoSize extends HTMLTextAreaElement {
     constructor() {
