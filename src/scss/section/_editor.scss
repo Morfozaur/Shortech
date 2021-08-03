@@ -1,5 +1,8 @@
 .in-editor {
   background-color: $color-second;
+  &:nth-of-type(odd) .post-buttons {
+    flex-direction: row-reverse;
+  }
 }
 
 .post-editor {

@@ -36,7 +36,6 @@ const Content = () => {
             <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>
             <section className='content-section'>
 
-
                 {newPost && <Post title={''}
                                   text={''}
                                   img={''}

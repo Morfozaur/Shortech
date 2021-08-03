@@ -13,8 +13,6 @@ const Post = ({title, text, img, tags, highlight, date, createPost, updatePost})
     const [newTitle, setNewTitle] = useState(title);
     const [newTags, setNewTags] = useState(tags);
     const [newText, setNewText] = useState(text);
-    const [newDate, setNewDate] = useState(date);
-    // console.log(title, text, img, tags, highlight)
 
     useEffect(()=> {
         if(createPost) {
@@ -44,7 +42,7 @@ const Post = ({title, text, img, tags, highlight, date, createPost, updatePost})
             <div className="post-content">
                 {!editor && (
                     <>
-                        <PostContentMain title={title} tags={tags} text={text}/>
+                        <PostContentMain title={newTitle} tags={newTags} text={newText}/>
 
                     </>
                 )}
@@ -54,9 +52,7 @@ const Post = ({title, text, img, tags, highlight, date, createPost, updatePost})
                                    newTags={newTags}
                                    setNewTags={setNewTags}
                                    newText={newText}
-                                   setNewText={setNewText}
-                                   newDate={newDate}
-                                   setNewDate={setNewDate}/>}
+                                   setNewText={setNewText}/>}
                 <PostDate date={date}/>
             </div>
             <div className='post-img'>
@@ -67,6 +63,8 @@ const Post = ({title, text, img, tags, highlight, date, createPost, updatePost})
                 <button className="btn btn-post" onClick={e=>changeEdit(e)}>{editBtn}</button>
                 {editor && <button className="btn btn-post delete">Usuń</button>}
             </div>
+            {editor &&
+                <i className="fas fa-times-circle fa-lg cancel" onClick={e=>changeEdit(e)}/>}
         </div>
     );
 }
