@@ -1,14 +1,26 @@
 const listInit = {
+    loading: false,
     posts: [],
     error: ''
 }
 
 const postsList = (state = listInit, action) => {
     switch (action.type) {
+        case "LOADING":
+            return {
+                ...state,
+                loading: true
+        }
         case "ERROR":
-            return {posts: [], error: action.payload}
+            return {
+                loading: false,
+                posts: [],
+                error: action.payload}
         case 'POSTS':
-            return {posts: action.payload, error: ''}
+            return {
+                loading: false,
+                posts: action.payload,
+                error: ''}
         default:
             return state
     }

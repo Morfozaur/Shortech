@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Tag from "./Tag";
+import {useSelector} from "react-redux";
 
 const PostContentEditor = ({
                                newTitle, setNewTitle,
                                newTags, setNewTags,
-                               newText, setNewText,
-                               newDate, setNewDate,}) => {
+                               newText, setNewText,}) => {
 
     const [tagActivator, setTagActivator] = useState(false);
+
+    const currPostsNum = useSelector(state => state.count)
 
     const changeTitle = (e) => {
         setNewTitle(e.target.value)
@@ -33,13 +35,6 @@ const PostContentEditor = ({
         setNewText(e.target.value)
     };
 
-    // const changeDate = (e,type) => {
-    //     const date = newDate;
-    //     date[type] = e.target.value;
-    //     setNewDate(date);
-    // };
-
-
     return (
         <div className="post-content-main">
 
@@ -49,13 +44,6 @@ const PostContentEditor = ({
                            className='post-editor-title'
                            value={newTitle}
                            onChange={e=>changeTitle(e)}/>
-                    {/*<div className="date-selector">*/}
-                    {/*    <input type="text" className="day" value={newDate[0]} onChange={e=>changeDate(e,0)}/>*/}
-                    {/*    <p>/</p>*/}
-                    {/*    <input type="text" className="month" value={newDate[1]} onChange={e=>changeDate(e,1)}/>*/}
-                    {/*    <p>/</p>*/}
-                    {/*    <input type="text" className="year" value={newDate[2]} onChange={e=>changeDate(e,2)}/>*/}
-                    {/*</div>*/}
                 </div>
                 <div className="tags">
                     {newTags.map((tag, idx) => <Tag key={newTitle+tag+idx} tag={tag} idx={idx} edit={true}/>)}
