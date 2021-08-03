@@ -1,55 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import Post from "./elements/Post";
+import {fetchPosts, tagPosts} from "../firebaseFunc";
+import {useDispatch, useSelector} from "react-redux";
+import {switchDate} from "../redux/actions/switchDate";
 // import {postDatabase} from "../postsDatabase";
-import {db} from "../firebase";
+// import {db} from "../firebase";
 // import sortBy from "array-sort-by";
 
 const Content = () => {
-    const [posts, setPosts] = useState([]);
     const [newPost, setNewPost] = useState(false)
 
+    const dispatch = useDispatch();
+    const postList = useSelector(state => state.sort.posts)
+
     const updatePost = (idx, post) => {
-        const postLists = posts;
-        postLists[idx] = post;
-        setPosts(postLists);
-    }
-
-
-    //TO TEN FRAGMENT
-
-    const fetchSinglePost = async (id, array) => {
-        const singlePost = await db.collection('articles').doc(id).get()
-        array.push(singlePost.data())
+        // const postLists = posts;
+        // postLists[idx] = post;
+        // setPosts(postLists);
     }
 
     useEffect( () => {
-        const fetchPosts = async () => {
-            const postsArray = [];
-            const res =  await db.collection('sort-data').doc('chrono').get();
-            const postsList = await res.data().data;
-            for (const post of postsList) {
-                await fetchSinglePost(post, postsArray);
-            }
-            setPosts(postsArray);
-        };
-        fetchPosts();
+        dispatch(switchDate())
     }, [])
-
-    //
-    // useEffect(()=> {
-    //     const fetchPosts = async() => {
-    //         const res = await db.collection('articles').get();
-    //         res.docs.forEach(single => {
-    //             setPosts([...posts, single.data()])
-    //         })
-    //     }
-    //     fetchPosts();
-    // }, [])
-
-    //TO TEN FRAGMENT
 
     const addNew = (e) => {
         setNewPost(!newPost)
+    }
+
+    const searchTags = (e) => {
+        // tagPosts(setPosts, e.target.innerHTML)
     }
 
     return (
@@ -67,8 +46,7 @@ const Content = () => {
                                   createPost={true}
                                   updatePost={updatePost}/>}
 
-                {
-                    posts && posts.map((post) => {
+                {postList.length > 0 && postList.map((post) => {
                         const {title, text, img, tags, highlight, id, date} = post;
                         return (
                             <Post title={title}

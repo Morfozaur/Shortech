@@ -31,9 +31,9 @@ const Post = ({title, text, img, tags, highlight, date, createPost, updatePost})
         }
     },[currTextarea, editor])
 
-    const changeEdit = (e, resi) => {
+    const changeEdit = (e) => {
         e.preventDefault();
-        setCurrTextarea(e.target.parentElement.parentElement)
+        setCurrTextarea(e.target.parentElement.parentElement);
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');

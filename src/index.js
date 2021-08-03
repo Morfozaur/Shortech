@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './js/components/App';
 import reportWebVitals from './reportWebVitals';
 import autosize from "autosize/dist/autosize";
-// import store from './js/store'
-// import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
+import {applyMiddleware, compose, createStore} from "redux";
+import thunk from "redux-thunk";
+import {allReducers} from "./js/redux/reducers/allReducers";
 
 class AutoSize extends HTMLTextAreaElement {
     constructor() {
@@ -19,11 +21,18 @@ customElements.define(
     { extends: "textarea" }
 );
 
+const composeEnhancers = compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+const store = createStore(allReducers, composeEnhancers)
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

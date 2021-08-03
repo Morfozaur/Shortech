@@ -1,15 +1,20 @@
 import "../../scss/main.scss"
 import Header from "./Header";
 import Content from "./Content";
-import Footer from "./Footer";
+import {HashRouter, Route, Switch,} from 'react-router-dom';
+import Login from "./Login";
 
 function App() {
-  return (
-    <div className="container">
-      <Header/>
-      <Content/>
-      <Footer/>
-    </div>
+    return (
+      <HashRouter>
+        <div className="container">
+          <Header/>
+          <Switch>
+              <Route exact path='/' component={Content} />
+              <Route path='/login' component={Login} />
+          </Switch>
+        </div>
+      </HashRouter>
   );
 }
 
