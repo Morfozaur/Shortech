@@ -31,7 +31,7 @@
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: .6em;
+    gap: 9px;
     &-single {
       user-select :none;
       background-color: $color-third;
