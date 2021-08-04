@@ -12,4 +12,8 @@
   &:active {
     transform: scale(.95);
   }
+  &.alert {
+    background-color: $color-cancel;
+    border-color: $color-cancel;
+  }
 }

@@ -18,7 +18,6 @@ const Content = () => {
 
     const addNew = (e) => {
         setNewPost(!newPost)
-        console.log(new Date())
     }
 
     const searchTags = (e) => {

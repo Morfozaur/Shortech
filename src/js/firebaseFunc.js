@@ -16,10 +16,10 @@ const createInFirebase = async (post) => {
 };
 
 const deleteFromFirebase = async (id) => {
-    const deletePost = await db.collection('articles').delete()
+    const deletePost = await db.collection('articles').doc(id).delete()
         .catch(err => {
             console.error(err)
         })
 };
 
-export {updateInFirebase, createInFirebase}
+export {updateInFirebase, createInFirebase, deleteFromFirebase}
