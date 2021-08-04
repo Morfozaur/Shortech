@@ -5,7 +5,7 @@ const switchTag = (key) => {
     return (dispatch) => {
         db.collection('articles').where('tags', 'array-contains', key).get()
             .then(res => {
-                const data = res.docs.map(post =>post.data())
+                const data = res.docs.map(post => [post.id,post.data()])
                 dispatch(fetchPosts(data))
             })
             .catch(err => {

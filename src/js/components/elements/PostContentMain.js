@@ -1,7 +1,14 @@
 import React from 'react';
 import Tag from "./Tag";
+import {useDispatch} from "react-redux";
+import {switchTag} from "../../redux/actions/switchTag";
 
-const PostContentMain = ({title,tags, text, searchTags}) => {
+const PostContentMain = ({title,tags, text}) => {
+
+    const dispatch = useDispatch();
+    const searchTags = e => {
+        dispatch(switchTag(e.target.innerHTML))
+    }
 
 
     return (
@@ -11,7 +18,7 @@ const PostContentMain = ({title,tags, text, searchTags}) => {
                 {tags.map((tag, idx) => <Tag key={title+tag+idx}
                                              tag={tag}
                                              idx={idx}
-                                             searchTags={searchTags}/>)}
+                                             handleClick={searchTags}/>)}
             </div>
             <p className='post-text'>{text}</p>
         </div>

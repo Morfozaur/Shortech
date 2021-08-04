@@ -4,7 +4,7 @@ body {
   font-family: Raleway, sans-serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: Staatliches,sans-serif;
   color: $color-third-dark;
 }
@@ -19,6 +19,10 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
 }
 
 p {
