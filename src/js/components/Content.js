@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Post from "./elements/Post";
-import {fetchPosts, tagPosts} from "../firebaseFunc";
 import {useDispatch, useSelector} from "react-redux";
 import {switchDate} from "../redux/actions/switchDate";
-// import {postDatabase} from "../postsDatabase";
-// import {db} from "../firebase";
-// import sortBy from "array-sort-by";
+import {updateInFirebase} from "../firebaseFunc";
+import {postDatabase} from "../postsDatabase";
+import {db} from "../firebase";
 
 const Content = () => {
     const [newPost, setNewPost] = useState(false)
@@ -13,18 +12,13 @@ const Content = () => {
     const dispatch = useDispatch();
     const postList = useSelector(state => state.sort.posts)
 
-    const updatePost = (idx, post) => {
-        // const postLists = posts;
-        // postLists[idx] = post;
-        // setPosts(postLists);
-    }
-
     useEffect( () => {
         dispatch(switchDate())
     }, [])
 
     const addNew = (e) => {
         setNewPost(!newPost)
+        console.log(new Date())
     }
 
     const searchTags = (e) => {
@@ -41,21 +35,23 @@ const Content = () => {
                                   img={''}
                                   tags={[]}
                                   highlight={''}
-                                  date={''}
                                   createPost={true}
-                                  updatePost={updatePost}/>}
+                                  editorClass={'Zapisz'}/>}
 
                 {postList.length > 0 && postList.map((post) => {
-                        const {title, text, img, tags, highlight, id, date} = post;
+                        const {title, text, img, tags, highlight, date} = post[1];
+                        const id = post[0];
                         return (
-                            <Post title={title}
-                                  key={id}
+                            <Post key={id}
+                                  id={id}
+                                  title={title}
                                   text={text}
                                   img={img}
                                   tags={tags}
                                   highlight={highlight}
                                   date={date}
-                                  updatePost={updatePost}/>
+                                  createPost={false}
+                                  editorClass ={"Edytuj"}/>
                         )
                     })
                 }

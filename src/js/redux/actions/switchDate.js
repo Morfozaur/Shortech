@@ -5,7 +5,7 @@ const switchDate = () => {
     return (dispatch) => {
         db.collection('articles').orderBy('date', 'desc').get()
             .then(res => {
-                const data = res.docs.map(post =>post.data())
+                const data = res.docs.map(post => [post.id,post.data()]);
                 dispatch(fetchPosts(data));
                 dispatch(fetchCounter(data.length));
             })

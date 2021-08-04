@@ -1,0 +1,11 @@
+.post-alert {
+  width: 100%;
+  background-color: $color-alert;
+  color: $color-cancel;
+  border: 1px solid $color-cancel;
+  border-radius: 10px;
+  padding: 1.2em;
+  h4 {
+    color: $color-cancel;
+  }
+}

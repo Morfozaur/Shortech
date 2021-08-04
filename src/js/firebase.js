@@ -13,15 +13,3 @@ const db = firebase.firestore();
 
 export {db}
 export default firebase;
-
-
-// const click = async () => {
-//
-//     postDatabase.forEach( async post => {
-//         const newData = await db.collection('articles').add(post)
-//     })
-//
-//
-//     const data = await db.collection('articles').get();
-//     data.docs.forEach(el => console.log(el.data()))
-// };
