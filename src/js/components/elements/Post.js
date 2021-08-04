@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {switchTag} from "../../redux/actions/switchTag";
 import Alert from "./Alert";
 import {createInFirebase, updateInFirebase} from "../../firebaseFunc";
+import PromptRemove from "./PromptRemove";
 
 const Post = ({
                   id,
@@ -36,6 +37,9 @@ const Post = ({
     const [newTags, setNewTags] = useState(tags);
     const [newText, setNewText] = useState(text);
     const [tagClass, setTagClass] = useState('');
+
+    const [promptRemove, setPromptRemove] = useState(false);
+    const [postToRemove, setPostToRemove] = useState('')
 
     const [titleErr, setTitleErr] = useState(false);
     const [tagsErr, setTagsErr] = useState(false);
@@ -92,6 +96,7 @@ const Post = ({
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
         if (createPost) {addNew()}
         setAlert(false);
+        setPromptRemove(false);
         if (!createPost) {
             setNewTitle(title);
             setNewText(text);
@@ -146,8 +151,6 @@ const Post = ({
     };
 
 
-
-
     return (
         <>
             {alert &&
@@ -181,10 +184,12 @@ const Post = ({
                 <div className="post-buttons">
                     {editor && <button className="btn btn-post">Zdjęcie</button>}
                     <button className="btn btn-post" onClick={e=>saveEditedPost(e)}>{editBtn}</button>
-                    {editor && <button className="btn btn-post delete">Usuń</button>}
+                    {editor && <button className="btn btn-post delete" onClick={e=>setPromptRemove(true)}>Usuń</button>}
                 </div>
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel" onClick={cancelEdition}/>}
+                {promptRemove &&
+                <PromptRemove />}
             </div>
         </>
     );
