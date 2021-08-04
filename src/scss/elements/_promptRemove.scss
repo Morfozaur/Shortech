@@ -1,0 +1,17 @@
+.remove-frame {
+  margin: 1.2em;
+  padding: 1.2em;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  border: 3px solid $color-cancel;
+  > * + * {
+    margin-top: 1rem;
+  }
+  &-buttons {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+  }
+}

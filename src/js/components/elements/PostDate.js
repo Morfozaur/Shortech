@@ -1,10 +1,11 @@
 import React from 'react';
+import {customDate} from "../../customDate";
 
 
-const PostDate = ({date}, createPost) => {
+const PostDate = ({date, createPost}) => {
     let postDate = ''
-    if (!createPost) {
-        postDate = new Date(date).toLocaleString()
+    if (createPost === false) {
+        postDate = new Date(date).toLocaleString().slice(0, -3);
     }
     return (
         <div className="post-content-bottom">

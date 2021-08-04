@@ -8,6 +8,7 @@ import {switchTag} from "../../redux/actions/switchTag";
 import Alert from "./Alert";
 import {createInFirebase, updateInFirebase} from "../../firebaseFunc";
 import PromptRemove from "./PromptRemove";
+import {customDate} from "../../customDate";
 
 const Post = ({
                   id,
@@ -126,7 +127,7 @@ const Post = ({
                     isNew: createPost
                 }
                 if (createPost) {
-                    postObj.date = new Date;
+                    postObj.date = customDate()
                     createInFirebase(postObj)
                         .then(()=> {
                             updateHTML(e)
@@ -176,7 +177,7 @@ const Post = ({
                                        setNewText={setNewText}
                                        tagClass={tagClass}
                                        setTagClass={setTagClass}/>}
-                    <PostDate date={date} set={createPost}/>
+                    <PostDate date={date} createPost={createPost}/>
                 </div>
                 <div className='post-img'>
                     <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>
@@ -184,15 +185,16 @@ const Post = ({
                 <div className="post-buttons">
                     {editor && <button className="btn btn-post">Zdjęcie</button>}
                     <button className="btn btn-post" onClick={e=>saveEditedPost(e)}>{editBtn}</button>
-                    {editor && <button className="btn btn-post delete" onClick={e=>setPromptRemove(true)}>Usuń</button>}
+                    {editor && <button className="btn btn-post alert" onClick={()=>setPromptRemove(true)}>Usuń</button>}
                 </div>
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel" onClick={cancelEdition}/>}
-                {promptRemove &&
-                <PromptRemove />}
+
             </div>
+            {promptRemove &&
+            <PromptRemove id={id} setPromptRemove={setPromptRemove}/>}
         </>
     );
 }
 
-export default Post
+export default Post;
