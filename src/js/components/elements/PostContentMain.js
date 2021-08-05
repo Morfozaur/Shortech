@@ -2,12 +2,16 @@ import React from 'react';
 import Tag from "./Tag";
 import {useDispatch} from "react-redux";
 import {switchTag} from "../../redux/actions/switchTag";
+import {fetchTagLoader} from "../../redux/actions/fetchers";
 
 const PostContentMain = ({title,tags, text}) => {
 
     const dispatch = useDispatch();
     const searchTags = e => {
-        dispatch(switchTag(e.target.innerHTML))
+        const tag = e.target.innerHTML;
+        dispatch(switchTag(tag));
+        console.log(tag)
+        dispatch(fetchTagLoader(tag))
     }
 
 

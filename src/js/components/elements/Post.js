@@ -143,7 +143,6 @@ const Post = ({
 
     const loadImg = (e, setLoading) => {
         e.preventDefault();
-        console.log('peniz');
         uploadImg(e, setLoading, setNewImg);
     };
 

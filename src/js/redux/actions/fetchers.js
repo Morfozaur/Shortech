@@ -10,7 +10,22 @@ const fetchError = data => {
     return {type: 'ERROR', payload: data}
 }
 
-const fetchCounter = data => {
-    return {type: 'COUNT-POSTS', payload: data}
+const fetchLastPost = data => {
+    return {type: 'LAST-POSTS', payload: data}
 }
-export {fetchLoading, fetchPosts, fetchError, fetchCounter}
+
+const fetchTagLoader = data => {
+    return {type: 'CHANGE-TAG', payload: data}
+}
+
+const logIn = () => {
+    return {type: 'LOGGED'}
+}
+
+export {
+    fetchLoading,
+    fetchPosts,
+    fetchError,
+    fetchLastPost,
+    fetchTagLoader,
+    logIn}

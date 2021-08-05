@@ -1,5 +1,4 @@
 import React from 'react';
-import {customDate} from "../../customDate";
 
 
 const PostDate = ({date, createPost}) => {

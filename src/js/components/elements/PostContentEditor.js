@@ -38,8 +38,10 @@ const PostContentEditor = ({
         tagClass === '' ? setTagClass( ' add-tag-new') : setTagClass('');
         if (tagToAdd.length>0) {
             const checker = tagToAdd.toLowerCase();
+            console.log(checker)
             if (!newTags.includes(checker)) {
-                setNewTags(tags => [...tags, tagToAdd])
+                setNewTags(tags => [...tags, checker])
+                console.log(newTags)
             }
         }
         setTagToAdd('')
