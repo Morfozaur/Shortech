@@ -1,26 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import PostContentMain from "./PostContentMain";
-import PostDate from "./PostDate";
-import PostContentEditor from "./PostContentEditor";
 import autosize from "autosize/dist/autosize";
-import {useDispatch} from "react-redux";
-import {switchTag} from "../../redux/actions/switchTag";
+import firebase from "firebase";
+
 import Alert from "./Alert";
-import {createInFirebase, updateInFirebase} from "../../firebaseFunc";
+import {createInFirebase, updateInFirebase, uploadImg} from "../../firebaseFunc";
 import PromptRemove from "./PromptRemove";
 import {customDate} from "../../customDate";
+import PostButtons from "./PostButtons";
+import PostImage from "./PostImage";
+import PostContent from "./PostContent";
 
 const Post = ({
-                  id,
-                  title,
-                  text,
-                  img,
-                  tags,
-                  highlight,
-                  date,
-                  createPost,
-                  editorClass,
-                  addNew}) => {
+                  id, title, text, img, tags, highlight, date,
+                  createPost, editorClass, addNew
+}) => {
 
     const [editor, setEditor] = useState(false);
     const [postClass, setPostClass] = useState('post');
@@ -28,7 +21,6 @@ const Post = ({
     const [textareaResizer, setTextareaResizer] = useState('');
 
     const [alert, setAlert] = useState(false);
-    const [alertMsg, setAlertMsg] = useState('');
 
     const [currTitle, setCurrTitle] = useState(title);
     const [currTags, setCurrTags] = useState(tags);
@@ -37,19 +29,17 @@ const Post = ({
     const [newTitle, setNewTitle] = useState(title);
     const [newTags, setNewTags] = useState(tags);
     const [newText, setNewText] = useState(text);
+    const [newImg, setNewImg] = useState(img);
+    const [loading, setLoading] = useState(0)
     const [tagClass, setTagClass] = useState('');
 
     const [promptRemove, setPromptRemove] = useState(false);
-    const [postToRemove, setPostToRemove] = useState('')
 
     const [titleErr, setTitleErr] = useState(false);
     const [tagsErr, setTagsErr] = useState(false);
     const [textErr, setTextErr] = useState(false);
     const [imgErr, setImgErr] = useState(false);
 
-
-
-    // Open new post editor
     useEffect(()=> {
         if(createPost) {
             setEditor(true);
@@ -57,8 +47,6 @@ const Post = ({
         }
     },[createPost])
 
-
-    // Update autosize
     useEffect(()=> {
         if (editor && textareaResizer) {
             const textArea = textareaResizer.querySelector('textarea');
@@ -66,20 +54,20 @@ const Post = ({
         }
     },[textareaResizer, editor])
 
-
-    // Post edition
-
-    const verify = () => {
+    const verifyPost = () => {
         let pass = true;
 
-        if (newTitle < 5) { setTitleErr(true); pass = false}
-        else { setTitleErr(false)}
+        if (newTitle < 5) {setTitleErr(true); pass = false}
+        else {setTitleErr(false)}
 
-        if (newText < 30) { setTextErr(true); pass = false}
-        else { setTextErr(false)}
+        if (newText < 30) {setTextErr(true); pass = false}
+        else {setTextErr(false)}
 
-        if (newTags.length < 1) { setTagsErr(true); pass = false }
-        else { setTagsErr(false)}
+        if (newTags.length < 1) {setTagsErr(true); pass = false }
+        else {setTagsErr(false)}
+
+        if (!newImg.includes('https://firebasestorage.googleapis.com/v0/b/shortech')) {setImgErr(true); pass = false }
+        else {setImgErr(false)}
 
         return pass
     }
@@ -95,13 +83,15 @@ const Post = ({
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
-        if (createPost) {addNew()}
         setAlert(false);
         setPromptRemove(false);
-        if (!createPost) {
+        if (createPost) {
+            addNew()
+        } else {
             setNewTitle(title);
             setNewText(text);
             setNewTags(tags);
+            setNewImg(img)
         }
     }
 
@@ -119,11 +109,12 @@ const Post = ({
             modifyButtons(e);
         } else {
 
-            if (verify()) {
+            if (verifyPost()) {
                 const postObj = {
                     title: newTitle,
                     tags: newTags,
                     text: newText,
+                    img: newImg,
                     isNew: createPost
                 }
                 if (createPost) {
@@ -148,47 +139,40 @@ const Post = ({
                 setAlert(true)
             }
         }
-
     };
 
+    const loadImg = (e, setLoading) => {
+        e.preventDefault();
+        console.log('peniz');
+        uploadImg(e, setLoading, setNewImg);
+    };
 
     return (
         <>
             {alert &&
             <Alert title={titleErr} tags={tagsErr} text={textErr} img={imgErr}/>}
             <div className={highlight ? `${postClass} highlighted` : `${postClass}`}>
-                <div className="post-content">
-                    {!editor && (
-                        <>
-                            <PostContentMain title={currTitle}
-                                             tags={currTags}
-                                             text={currText}/>
 
-                        </>
-                    )}
+                <PostContent editor={editor} date={date} createPost={createPost}
+                             currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
+                             currTags={currTags} newTags={newTags} setNewTags={setNewTags}
+                             tagClass={tagClass} setTagClass={setTagClass}
+                             currText={currText} newText={newText} setNewText={setNewText}/>
 
-                    {editor &&
+                <PostImage img={newImg} editor={editor} loading={loading}/>
 
-                    <PostContentEditor newTitle={newTitle}
-                                       setNewTitle={setNewTitle}
-                                       newTags={newTags}
-                                       setNewTags={setNewTags}
-                                       newText={newText}
-                                       setNewText={setNewText}
-                                       tagClass={tagClass}
-                                       setTagClass={setTagClass}/>}
-                    <PostDate date={date} createPost={createPost}/>
-                </div>
-                <div className='post-img'>
-                    <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>
-                </div>
-                <div className="post-buttons">
-                    {editor && <button className="btn btn-post">Zdjęcie</button>}
-                    <button className="btn btn-post" onClick={e=>saveEditedPost(e)}>{editBtn}</button>
-                    {editor && <button className="btn btn-post alert" onClick={()=>setPromptRemove(true)}>Usuń</button>}
-                </div>
+                <PostButtons id={id}
+                             editor={editor}
+                             saveEditedPost={saveEditedPost}
+                             editBtn={editBtn}
+                             setPromptRemove={setPromptRemove}
+                             loadImg={loadImg}
+                             setLoading={setLoading}
+                             setNewImg={setNewImg}/>
+
                 {editor &&
-                <i className="fas fa-times-circle fa-lg cancel" onClick={cancelEdition}/>}
+                <i className="fas fa-times-circle fa-lg cancel"
+                   onClick={cancelEdition}/>}
 
             </div>
             {promptRemove &&

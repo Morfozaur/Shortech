@@ -8,7 +8,7 @@ const Alert = ({title, tags, text, img}) => {
                 {title && <li>Tytuł musi składać się przynajmniej z 5 znaków</li>}
                 {text && <li>Wpis musi mieć długość co najmniej 30 znaków</li>}
                 {tags && <li>Wpis musi zawierać co najmniej jeden tag</li>}
-                {img && <li>Wpis musi mieć zdjęcie</li>}
+                {img && <li>Wpis musi zawierać zdjęcie</li>}
             </ul>
         </div>
     );

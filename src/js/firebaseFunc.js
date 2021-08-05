@@ -1,4 +1,5 @@
 import {db} from "./firebase";
+import firebase from "firebase";
 
 // Edit functions
 const pushToFirebase = () => {
@@ -7,7 +8,6 @@ const pushToFirebase = () => {
 
 const updateInFirebase = async (id, post) => {
     const fetchedPost = db.collection('articles').doc(id);
-    console.log(fetchedPost, id, post)
     const res = await fetchedPost.update(post);
 };
 
@@ -22,4 +22,26 @@ const deleteFromFirebase = async (id) => {
         })
 };
 
-export {updateInFirebase, createInFirebase, deleteFromFirebase}
+const uploadImg = (e, setLoading, setNewImg) => {
+    const file = e.target.files[0];
+    const storageRef = firebase.storage().ref('img/' + file.name);
+    const task = storageRef.put(file);
+    task.on('stage_changed',
+        (snapshot) => {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setLoading(percentage);
+        },
+
+        (error) =>{
+
+        },
+        () =>{
+            task.snapshot.ref.getDownloadURL().then((url) => {
+                setNewImg(url);
+                console.log(url)
+            });
+        }
+    )
+}
+
+export {updateInFirebase, createInFirebase, deleteFromFirebase, uploadImg}

@@ -41,6 +41,9 @@
       font-size: .6em;
       padding: .6em .9em;
       height: 21px;
+      &.delete {
+        background: $color-cancel;
+      }
     }
   }
   .date-line {
@@ -52,6 +55,7 @@
     color: $color-third;
   }
   &-img {
+    display: flex;
     position: relative;
     height: 200px;
     width: 300px;
@@ -59,6 +63,11 @@
     border: 1px solid $color-third;
     border-radius: 5px;
     overflow: hidden;
+    &-loading {
+      width: 100%;
+      align-self: center;
+      text-align: center;
+    }
     &-file {
       position: absolute;
       width: 100%;
