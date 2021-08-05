@@ -26,6 +26,14 @@ const fetchTagArrLength = data => {
     return {type: 'LAST-TAG-POSTS', payload: data}
 }
 
+const fetchSearchResult = data => {
+    return {type: 'SEARCH', payload:data}
+}
+
+const fetchFilterType = data => {
+    return {type: 'FILTER', payload:data}
+}
+
 const logIn = () => {
     return {type: 'LOGGED'}
 }
@@ -38,4 +46,6 @@ export {
     fetchTagLoader,
     fetchTagArr,
     fetchTagArrLength,
+    fetchSearchResult,
+    fetchFilterType,
     logIn}

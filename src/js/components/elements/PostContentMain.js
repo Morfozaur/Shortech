@@ -4,13 +4,12 @@ import {useDispatch} from "react-redux";
 import {switchTag} from "../../redux/actions/switchTag";
 import {fetchTagLoader} from "../../redux/actions/allFetchers";
 
-const PostContentMain = ({title,tags, text}) => {
+const PostContentMain = ({title,tags, text, setEndIndicator}) => {
 
     const dispatch = useDispatch();
     const searchTags = e => {
         const tag = e.target.innerHTML;
-        dispatch(switchTag(tag));
-        console.log(tag)
+        dispatch(switchTag(tag, setEndIndicator));
         dispatch(fetchTagLoader(tag))
     }
 

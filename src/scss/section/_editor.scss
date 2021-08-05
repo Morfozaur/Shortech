@@ -6,13 +6,10 @@
 }
 
 .post-editor {
-  //min-height: 200px;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  //margin-bottom: -.9em;
   &-header {
-    height: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +18,19 @@
     height: 24px;
     width: 100%;
     font-size: 1.5rem;
+    line-height: 1em;
     text-align: left;
+    font-family: Staatliches, sans-serif;
+    border:none;
+    border-top: 2px solid white;
+    color: $color-third-dark;
+    padding: 0;
+    resize: none;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $color-third-dark;
+      border-top: 2px solid white;
+    }
   }
   .date-selector {
     display: flex;

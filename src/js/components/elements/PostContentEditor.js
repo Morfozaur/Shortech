@@ -13,6 +13,7 @@ const PostContentEditor = ({
     const [tagToAdd, setTagToAdd] = useState('');
 
     const changeTitle = (e) => {
+        e.target.style.height = e.target.scrollHeight + 'px'
         setNewTitle(e.target.value)
     };
 
@@ -61,10 +62,10 @@ const PostContentEditor = ({
 
             <form className='post-editor'>
                 <div className="post-editor-header">
-                    <input type="text"
-                           className='post-editor-title'
+                    <textarea
+                           class='post-editor-title'
                            value={newTitle}
-                           onChange={e=>changeTitle(e)}/>
+                           onChange={e=>changeTitle(e)} is="auto-size"/>
                 </div>
                 <div className="tags">
                     {newTags.map((tag, idx) => {
@@ -77,7 +78,7 @@ const PostContentEditor = ({
                     <div className='add-tag'>
                         {tagActivator &&
                         <input type="text"
-                               className="tag-input"
+                               class="tag-input"
                                value={tagToAdd}
                                onChange={e=>changeTag(e)}/>}
                         <i className={`fas fa-plus-circle add-tag-ico${tagClass}`} onClick={e=>addTag(e)}/>

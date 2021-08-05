@@ -12,7 +12,7 @@ import PostContent from "./PostContent";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
-                  createPost, editorClass, addNew
+                  createPost, editorClass, addNew, setEndIndicator
 }) => {
 
     const [editor, setEditor] = useState(false);
@@ -49,8 +49,8 @@ const Post = ({
 
     useEffect(()=> {
         if (editor && textareaResizer) {
-            const textArea = textareaResizer.querySelector('textarea');
-            autosize.update(textArea);
+            const textarea = textareaResizer.querySelectorAll('textarea');
+            textarea.forEach(el => autosize.update(el))
         }
     },[textareaResizer, editor])
 
@@ -77,6 +77,7 @@ const Post = ({
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post')
         setTextareaResizer(e.target.parentElement.parentElement);
+        console.log(textareaResizer, 'bla')
     };
 
     const cancelEdition = () => {
@@ -151,14 +152,17 @@ const Post = ({
             {alert &&
             <Alert title={titleErr} tags={tagsErr} text={textErr} img={imgErr}/>}
             <div className={highlight ? `${postClass} highlighted` : `${postClass}`}>
-
                 <PostContent editor={editor} date={date} createPost={createPost}
                              currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
                              currTags={currTags} newTags={newTags} setNewTags={setNewTags}
                              tagClass={tagClass} setTagClass={setTagClass}
-                             currText={currText} newText={newText} setNewText={setNewText}/>
+                             currText={currText} newText={newText} setNewText={setNewText}
+                             setEndIndicator={setEndIndicator}/>
 
-                <PostImage img={newImg} editor={editor} loading={loading}/>
+                <PostImage img={newImg}
+                           editor={editor}
+                           loading={loading}
+                           highlight={highlight}/>
 
                 <PostButtons id={id}
                              editor={editor}
