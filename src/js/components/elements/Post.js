@@ -25,11 +25,15 @@ const Post = ({
     const [currTitle, setCurrTitle] = useState(title);
     const [currTags, setCurrTags] = useState(tags);
     const [currText, setCurrText] = useState(text);
+    const [currImg, setCurrImg] = useState(img);
+    const [sourceHighlight, setSourceHighlight] = useState(highlight);
 
     const [newTitle, setNewTitle] = useState(title);
     const [newTags, setNewTags] = useState(tags);
     const [newText, setNewText] = useState(text);
     const [newImg, setNewImg] = useState(img);
+    const [webHighlight, setWebHighlight] = useState(highlight)
+
     const [loading, setLoading] = useState(0)
     const [tagClass, setTagClass] = useState('');
 
@@ -89,17 +93,20 @@ const Post = ({
         if (createPost) {
             addNew()
         } else {
-            setNewTitle(title);
-            setNewText(text);
-            setNewTags(tags);
-            setNewImg(img)
+            setNewTitle(currTitle);
+            setNewText(currText);
+            setNewTags(currTags);
+            setNewImg(currImg);
+            setWebHighlight(sourceHighlight)
         }
     }
 
     const updateHTML = (e) => {
+        setSourceHighlight(webHighlight)
         setCurrTitle(newTitle);
         setCurrTags(newTags);
         setCurrText(newText);
+        setCurrImg(newImg);
         modifyButtons(e);
         setAlert(false)
     };
@@ -116,6 +123,7 @@ const Post = ({
                     tags: newTags,
                     text: newText,
                     img: newImg,
+                    highlight: webHighlight,
                     isNew: createPost
                 }
                 if (createPost) {
@@ -151,7 +159,7 @@ const Post = ({
         <>
             {alert &&
             <Alert title={titleErr} tags={tagsErr} text={textErr} img={imgErr}/>}
-            <div className={highlight ? `${postClass} highlighted` : `${postClass}`}>
+            <div className={webHighlight ? `${postClass} highlighted` : `${postClass}`}>
                 <PostContent editor={editor} date={date} createPost={createPost}
                              currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
                              currTags={currTags} newTags={newTags} setNewTags={setNewTags}
@@ -162,7 +170,8 @@ const Post = ({
                 <PostImage img={newImg}
                            editor={editor}
                            loading={loading}
-                           highlight={highlight}/>
+                           webHighlight={webHighlight}
+                           setWebHighlight={setWebHighlight}/>
 
                 <PostButtons id={id}
                              editor={editor}
@@ -176,7 +185,6 @@ const Post = ({
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel"
                    onClick={cancelEdition}/>}
-
             </div>
             {promptRemove &&
             <PromptRemove id={id} setPromptRemove={setPromptRemove}/>}

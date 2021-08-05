@@ -49,9 +49,7 @@ const PostContentEditor = ({
     }
 
     useEffect(()=> {
-         if (tagActivator) {
-             document.querySelector('.tag-input').focus()
-         }
+         if (tagActivator) {document.querySelector('.tag-input').focus()}
     }, [tagActivator])
 
 

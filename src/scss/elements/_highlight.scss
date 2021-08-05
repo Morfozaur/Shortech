@@ -10,5 +10,10 @@
     margin: .2em;
     background: white;
     border-radius: 50%;
+    border:2px solid $color-third-dark;
+    color: $color-third-dark;
+    &:active {
+      transform: scale(.94);
+    }
   }
 }

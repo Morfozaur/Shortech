@@ -21,14 +21,10 @@ const PostContent = ({
             )}
 
             {editor &&
-            <PostContentEditor newTitle={newTitle}
-                               setNewTitle={setNewTitle}
-                               newTags={newTags}
-                               setNewTags={setNewTags}
-                               newText={newText}
-                               setNewText={setNewText}
-                               tagClass={tagClass}
-                               setTagClass={setTagClass}/>}
+            <PostContentEditor newTitle={newTitle} setNewTitle={setNewTitle}
+                               newTags={newTags} setNewTags={setNewTags}
+                               newText={newText} setNewText={setNewText}
+                               tagClass={tagClass} setTagClass={setTagClass}/>}
             <PostDate date={date} createPost={createPost}/>
         </div>
     );
