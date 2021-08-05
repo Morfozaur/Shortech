@@ -1,5 +1,5 @@
 import {db} from "../../firebase";
-import {fetchLastPost, fetchError, fetchPosts} from "./fetchers";
+import {fetchLastPost, fetchError, fetchPosts} from "./allFetchers";
 
 const switchDate = () => {
     return (dispatch) => {

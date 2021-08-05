@@ -9,9 +9,13 @@ const Content = () => {
     const [newPost, setNewPost] = useState(false)
 
     const dispatch = useDispatch();
-    const postList = useSelector(state => state.sort.posts);
-    const lastState = useSelector(state => state.count);
-    const keyTag = useSelector(state => state.tag);
+
+    const postList = useSelector(state => state.sortedPosts.posts);
+    const lastPost = useSelector(state => state.lastPost);
+    const sortedTagPosts = useSelector(state => state.sortedTagPosts)
+    const keyTag = useSelector(state => state.tagSelect);
+
+
 
     useEffect( () => {
         dispatch(switchDate());
@@ -24,17 +28,28 @@ const Content = () => {
     
     const dej = () => {
         if (keyTag ==='date') {
-            dispatch(loadMoreData(lastState, postList))
+            dispatch(loadMoreData(lastPost, postList))
         } else {
-            dispatch(loadMoreTag(keyTag, lastState, postList))
+            dispatch(loadMoreTag(sortedTagPosts, postList))
         }
-        console.log(keyTag)
     };
+
+
 
     return (
         <>
-            <p>{lastState}</p>
+            <p>{lastPost}</p>
             <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>
+
+            {/*<InfiniteScroll*/}
+            {/*    next={() => {console.log(postList)*/}
+            {/*        dispatch(loadMoreData(lastState, postList))*/}
+            {/*    }}*/}
+            {/*    hasMore={true}*/}
+            {/*    loader={<p>Czytuczytu</p>}*/}
+            {/*    dataLength={postList.length}>*/}
+
+
             <section className='content-section'>
 
                 {newPost && <Post title={''}
@@ -65,9 +80,17 @@ const Content = () => {
                 }
 
             </section>
+
+            {/*</InfiniteScroll>*/}
+
             <br/>
             <br/>
             <p onClick={e=>dej(e)}>DEJ</p>
+
+
+
+
+
         </>
     );
 };

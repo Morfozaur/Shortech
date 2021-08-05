@@ -18,6 +18,14 @@ const fetchTagLoader = data => {
     return {type: 'CHANGE-TAG', payload: data}
 }
 
+const fetchTagArr = data => {
+    return {type: 'TAG-POSTS', payload: data}
+}
+
+const fetchTagArrLength = data => {
+    return {type: 'LAST-TAG-POSTS', payload: data}
+}
+
 const logIn = () => {
     return {type: 'LOGGED'}
 }
@@ -28,4 +36,6 @@ export {
     fetchError,
     fetchLastPost,
     fetchTagLoader,
+    fetchTagArr,
+    fetchTagArrLength,
     logIn}

@@ -2,7 +2,7 @@ import React from 'react';
 import Tag from "./Tag";
 import {useDispatch} from "react-redux";
 import {switchTag} from "../../redux/actions/switchTag";
-import {fetchTagLoader} from "../../redux/actions/fetchers";
+import {fetchTagLoader} from "../../redux/actions/allFetchers";
 
 const PostContentMain = ({title,tags, text}) => {
 

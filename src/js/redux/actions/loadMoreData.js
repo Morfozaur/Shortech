@@ -1,5 +1,5 @@
 import {db} from "../../firebase";
-import {fetchError, fetchLastPost, fetchPosts} from "./fetchers";
+import {fetchError, fetchLastPost, fetchPosts} from "./allFetchers";
 
 const loadMoreData = (lastState, postList) => {
     return (dispatch) => {
