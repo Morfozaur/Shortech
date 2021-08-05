@@ -16,4 +16,15 @@
     background-color: $color-cancel;
     border-color: $color-cancel;
   }
+  &-hide {
+    display: none;
+  }
+  &-downloader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+      font-size: .825rem;
+    }
+  }
 }

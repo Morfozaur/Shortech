@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Post from "./elements/Post";
 import {useDispatch, useSelector} from "react-redux";
 import {switchDate} from "../redux/actions/switchDate";
-import {updateInFirebase} from "../firebaseFunc";
-import {postDatabase} from "../postsDatabase";
-import {db} from "../firebase";
 
 const Content = () => {
     const [newPost, setNewPost] = useState(false)
@@ -35,7 +32,8 @@ const Content = () => {
                                   tags={[]}
                                   highlight={''}
                                   createPost={true}
-                                  editorClass={'Zapisz'}/>}
+                                  editorClass={'Zapisz'}
+                                  addNew={addNew}/>}
 
                 {postList.length > 0 && postList.map((post) => {
                         const {title, text, img, tags, highlight, date} = post[1];
