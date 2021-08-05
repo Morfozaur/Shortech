@@ -46,10 +46,6 @@
       }
     }
   }
-  .date-line {
-    margin: .3em 0;
-    border-top: 1px solid $color-third;
-  }
   &-date {
     font-size: .6em;
     color: $color-third;
@@ -87,6 +83,8 @@
   }
   .cancel {
     position: absolute;
+    background: white;
+    border-radius: 50%;
     top: -5px;
     right: -5px;
     color: $color-cancel;

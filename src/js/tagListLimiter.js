@@ -1,6 +1,6 @@
-const tagListLimiter = (arr, num) => {
-    const limiter = (arr.length < num) ? arr.length : num;
-    return arr.slice(0,limiter)
+const tagListLimiter = (arr, limiter) => {
+    const trimmer = (arr.length < limiter) ? arr.length : limiter;
+    return arr.slice(0,trimmer)
 };
 
 export {tagListLimiter}

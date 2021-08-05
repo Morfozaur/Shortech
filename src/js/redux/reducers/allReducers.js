@@ -5,6 +5,8 @@ import {lastPost} from "./lastPost";
 import {infiniteLoaderTag} from "./infiniteLoaderTag";
 import {lastTagPost} from "./lastTagPost";
 import {postsTagList} from "./postsTagList";
+import {searchResult} from "./searchResult";
+import {filterType} from "./filterType";
 
 const allReducers = combineReducers({
     log: isLogged,
@@ -12,7 +14,9 @@ const allReducers = combineReducers({
     lastPost: lastPost,
     tagSelect: infiniteLoaderTag,
     sortedTagPosts: postsTagList,
-    lastTagPost: lastTagPost
+    lastTagPost: lastTagPost,
+    searchResult: searchResult,
+    filterType: filterType,
 })
 
 export {allReducers}

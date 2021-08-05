@@ -8,13 +8,15 @@ const PostContent = ({
                          currTitle, newTitle, setNewTitle,
                          currTags, newTags, setNewTags,
                          tagClass,setTagClass,
-                         currText, newText, setNewText}) => {
+                         currText, newText, setNewText,
+                         setEndIndicator}) => {
     return (
         <div className="post-content">
             {!editor && (
                 <PostContentMain title={currTitle}
                                  tags={currTags}
-                                 text={currText}/>
+                                 text={currText}
+                                 setEndIndicator={setEndIndicator}/>
 
             )}
 
