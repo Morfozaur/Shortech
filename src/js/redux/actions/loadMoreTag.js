@@ -1,31 +1,13 @@
-import {db} from "../../firebase";
-import {fetchError, fetchLastPost, fetchPosts} from "./fetchers";
+import {tagListLimiter} from "../../tagListLimiter";
+import {fetchPosts, fetchTagArrLength} from "./allFetchers";
 
-const loadMoreTag = (key, lastState, postList) => {
+const loadMoreTag = (arr, postList) => {
     return (dispatch) => {
-        db.collection('articles')
-            .where('tags', 'array-contains', key)
-            .startAfter(lastState)
-            .limit(4)
-            .get()
-
-            .then(res => {
-                const resLength = res.docs.length;
-                if (resLength > 0) {
-                    const lastDataKey = res.docs[resLength -1].data().date;
-                    const data = res.docs.map(post => [post.id,post.data()])
-
-                    //SORTOWANIE
-
-                    const updatedData = [...postList, ...data]
-                    dispatch(fetchPosts(data));
-                    dispatch(fetchLastPost(lastDataKey));
-                }
-            })
-            .catch(err => {
-                dispatch(fetchError(err.message))
-            })
-
+        const limiter = postList.length + 1;
+        console.log(limiter)
+        const data = tagListLimiter(arr, limiter)
+        dispatch(fetchPosts(data));
+        dispatch(fetchTagArrLength(data.length));
     }
 };
 
