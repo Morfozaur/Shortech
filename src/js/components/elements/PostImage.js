@@ -10,7 +10,8 @@ const PostImage = ({
     };
     return (
         <div className='post-img'>
-            <i className={webHighlight ? `${star} fas` : `${star} far`} onClick={starHighlight}/>
+            {editor &&
+            <i className={webHighlight ? `${star} fas` : `${star} far`} onClick={starHighlight}/>}
             {(editor && loading > 0) &&
             <p className='post-img-loading'>Wczytywanie: {loading}%</p>}
             <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>

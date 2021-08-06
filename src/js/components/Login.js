@@ -1,32 +1,24 @@
 import React from 'react';
-import {Link, useHistory } from "react-router-dom";
+import LoginForm from "./elements/LoginForm";
+import {useSelector} from "react-redux";
+import firebase from "firebase";
 
 const Login = () => {
-    const history = useHistory();
+    const isLogged = useSelector(state => state.log)
 
-    const auth = () => {
-        return false
-    }
+    const logout = () => {
+        firebase.auth().signOut().catch(err => console.error(err.message))
+    };
 
-    const logMe = (e) => {
-        e.preventDefault();
-        history.push('/')
-    }
     return (
         <div className="login">
-            <form>
-                <div className="login-fields">
-                    <div className="login-name">
-                        <label htmlFor="name">Login:</label>
-                        <input type="text" id="name" autoComplete="off"/>
-                    </div>
-                    <div className="login-pass">
-                        <label htmlFor="pass">Hasło:</label>
-                        <input type="password" id="pass" autoComplete="off"/>
-                    </div>
-                </div>
-                <button className='btn login-btn' onClick={e=>logMe(e)}>Zaloguj</button>
-            </form>
+            {isLogged &&
+            <div className='login-status'>
+                <h3>Zalogowano jako:</h3>
+                <h4>Admnistrator</h4>
+                <button className='btn' onClick={logout}>Wyloguj</button>
+            </div>}
+            {!isLogged && <LoginForm/>}
         </div>
     );
 }
