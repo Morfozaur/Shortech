@@ -47,20 +47,22 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
             <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>}
 
                 <div className="sort-info">
-                    {keyTag === 'date' && <h5>Najnowsze wpisy:</h5>}
-                    {keyTag !== 'date' && <h5>Wpisy z kagetorii {keyTag}:</h5>}
+                    {keyTag === 'date' && <h4>Najnowsze wpisy:</h4>}
+                    {keyTag !== 'date' && <h4>Wpisy z kagetorii {keyTag}:</h4>}
                     <hr className='date-line'/>
                 </div>
                 <section className='content-section'>
 
-                    {(newPost && isLogged) && <Post title={''}
-                                      text={''}
-                                      img={''}
-                                      tags={[]}
-                                      highlight={''}
-                                      createPost={true}
-                                      editorClass={'Zapisz'}
-                                      addNew={addNew}/>}
+                    {(newPost && isLogged) &&
+                    <Post title={''}
+                          text={''}
+                          img={''}
+                          tags={[]}
+                          highlight={''}
+                          createPost={true}
+                          editorClass={'Zapisz'}
+                          isLogged={isLogged}
+                          addNew={addNew}/>}
 
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
@@ -83,7 +85,8 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                     }
 
                 </section>
-            <ArrowScroll endStream={endIndicator} scroll={scroll}/>
+            {postList.length > 3 &&
+            <ArrowScroll endStream={endIndicator} scroll={scroll}/>}
         </>
     );
 };

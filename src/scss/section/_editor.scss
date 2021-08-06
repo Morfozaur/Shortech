@@ -8,7 +8,7 @@
 .post-editor {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: .5em;
   &-header {
     display: flex;
     justify-content: space-between;
@@ -24,7 +24,7 @@
     border:none;
     border-top: 2px solid white;
     color: $color-third-dark;
-    padding: 0;
+    padding: 5px 0 9px;
     resize: none;
     &:focus {
       outline: none;

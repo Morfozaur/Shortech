@@ -16,7 +16,7 @@ const PostContentMain = ({title,tags, text, setEndIndicator}) => {
 
     return (
         <div className="post-content-main">
-            <h3 className='post-title'>{title}</h3>
+            <h2 className='post-title'>{title}</h2>
             <div className="tags">
                 {tags.map((tag, idx) => <Tag key={title+tag+idx}
                                              tag={tag}

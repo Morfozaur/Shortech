@@ -16,7 +16,7 @@ const PromptRemove = ({setPromptRemove, id}) => {
     };
     return (
         <div className='remove-frame'>
-            <h3>Czy na pewno chcesz usunąć ten wpis?</h3>
+            <h2>Czy na pewno chcesz usunąć ten wpis?</h2>
             <p>Jeśli naciśniesz "Usuń wpis", wpis zostanie trwale usunięty z bazy danych.</p>
             <div className="remove-frame-buttons">
                 <button className="btn remove-accept alert" onClick={e=>removePost(e)}>Usuń wpis</button>
