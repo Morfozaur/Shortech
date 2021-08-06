@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 const ArrowScroll = ({scroll, endStream}) => {
     const arrowClass= 'fa-2x upscroller fas fa-arrow-circle-'

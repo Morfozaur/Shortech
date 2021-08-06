@@ -3,6 +3,7 @@ import {switchDate} from "../redux/actions/switchDate";
 import {useHistory,} from 'react-router-dom';
 import {useDispatch} from "react-redux";
 import {fetchTagLoader} from "../redux/actions/allFetchers";
+import {switchTag} from "../redux/actions/switchTag";
 
 const Menu = ({setEndIndicator}) => {
     const [searchText, setSearchText] = useState('')
@@ -10,19 +11,19 @@ const Menu = ({setEndIndicator}) => {
     const dispatch = useDispatch();
 
     const sortByDate = () => {
-
         if (history.location.pathname !=='/') {history.push('/')}
         dispatch(switchDate(setEndIndicator));
         dispatch(fetchTagLoader('date'))
     };
 
     const searchInput = (e) => {
-        e.preventDefault();
         setSearchText(e.target.value)
     };
 
     const submit = (e) => {
         e.preventDefault();
+        dispatch(switchTag(searchText, setEndIndicator));
+        dispatch(fetchTagLoader(searchText))
     };
 
     return (
@@ -33,6 +34,7 @@ const Menu = ({setEndIndicator}) => {
                     <input type="text"
                            className="search inactive"
                            placeholder='Wyszukaj tag...'
+                           value={searchText}
                            onChange={e=>searchInput(e)}/>
                     <i className="fas fa-search main-menu-glass" onClick={e=>submit(e)}/>
                 </form>

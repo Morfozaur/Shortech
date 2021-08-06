@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import autosize from "autosize/dist/autosize";
-import firebase from "firebase";
 
 import Alert from "./Alert";
 import {createInFirebase, updateInFirebase, uploadImg} from "../../firebaseFunc";
@@ -9,8 +8,6 @@ import {customDate} from "../../customDate";
 import PostButtons from "./PostButtons";
 import PostImage from "./PostImage";
 import PostContent from "./PostContent";
-import {fetchTagLoader} from "../../redux/actions/allFetchers";
-import {useDispatch} from "react-redux";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,

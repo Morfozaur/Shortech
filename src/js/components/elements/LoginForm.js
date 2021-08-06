@@ -21,7 +21,7 @@ const LoginForm = () => {
 
     return (
         <form>
-            <h3>Zaloguj się:</h3>
+            <h2>Zaloguj się:</h2>
             <div className="login-fields">
                 <div className="login-name">
                     <label htmlFor="name">Login:</label>

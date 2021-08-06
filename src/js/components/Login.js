@@ -14,8 +14,8 @@ const Login = () => {
         <div className="login">
             {isLogged &&
             <div className='login-status'>
-                <h3>Zalogowano jako:</h3>
-                <h4>Admnistrator</h4>
+                <h2>Zalogowano jako:</h2>
+                <h3>Admnistrator</h3>
                 <button className='btn' onClick={logout}>Wyloguj</button>
             </div>}
             {!isLogged && <LoginForm/>}
