@@ -13,9 +13,12 @@
     gap: 1em;
     align-items: center;
   }
-  &-home:active {
-    color: $color-third-dark;
-    transform: scale(.96);
+  &-home, &-glass {
+    font-size: 1.5em;
+    &:active {
+      color: $color-third-dark;
+      transform: scale(.96);
+    }
   }
   .search {
     border: 1px solid $color-third;

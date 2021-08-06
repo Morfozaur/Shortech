@@ -1,7 +1,8 @@
 const isLogged = (state = false, action) => {
     switch (action.type) {
-        case 'LOGGED':
-            return true
+        case 'LOG-ACTION':
+            return action.payload
+
         default:
             return false
     }

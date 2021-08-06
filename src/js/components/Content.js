@@ -5,8 +5,9 @@ import {switchDate} from "../redux/actions/switchDate";
 import {loadMoreData} from "../redux/actions/loadMoreData";
 import {loadMoreTag} from "../redux/actions/loadMoreTag";
 import ArrowScroll from "./elements/ArrowScroll";
+import {fetchTagLoader} from "../redux/actions/allFetchers";
 
-const Content = ({endIndicator, setEndIndicator}) => {
+const Content = ({endIndicator, setEndIndicator, isLogged}) => {
     const [newPost, setNewPost] = useState(false)
 
 
@@ -40,11 +41,10 @@ const Content = ({endIndicator, setEndIndicator}) => {
         }
     }
 
-
     return (
         <>
-
-            <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>
+            {isLogged &&
+            <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>}
 
                 <div className="sort-info">
                     {keyTag === 'date' && <h5>Najnowsze wpisy:</h5>}
@@ -53,7 +53,7 @@ const Content = ({endIndicator, setEndIndicator}) => {
                 </div>
                 <section className='content-section'>
 
-                    {newPost && <Post title={''}
+                    {(newPost && isLogged) && <Post title={''}
                                       text={''}
                                       img={''}
                                       tags={[]}
@@ -76,7 +76,8 @@ const Content = ({endIndicator, setEndIndicator}) => {
                                       date={date}
                                       createPost={false}
                                       editorClass ={"Edytuj"}
-                                      setEndIndicator={setEndIndicator}/>
+                                      setEndIndicator={setEndIndicator}
+                                      isLogged={isLogged}/>
                             )
                         })
                     }

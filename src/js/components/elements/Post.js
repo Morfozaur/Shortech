@@ -9,10 +9,12 @@ import {customDate} from "../../customDate";
 import PostButtons from "./PostButtons";
 import PostImage from "./PostImage";
 import PostContent from "./PostContent";
+import {fetchTagLoader} from "../../redux/actions/allFetchers";
+import {useDispatch} from "react-redux";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
-                  createPost, editorClass, addNew, setEndIndicator
+                  createPost, editorClass, addNew, setEndIndicator, isLogged
 }) => {
 
     const [editor, setEditor] = useState(false);
@@ -173,14 +175,14 @@ const Post = ({
                            webHighlight={webHighlight}
                            setWebHighlight={setWebHighlight}/>
 
-                <PostButtons id={id}
-                             editor={editor}
-                             saveEditedPost={saveEditedPost}
-                             editBtn={editBtn}
-                             setPromptRemove={setPromptRemove}
-                             loadImg={loadImg}
-                             setLoading={setLoading}
-                             setNewImg={setNewImg}/>
+                {isLogged && <PostButtons id={id}
+                              editor={editor}
+                              saveEditedPost={saveEditedPost}
+                              editBtn={editBtn}
+                              setPromptRemove={setPromptRemove}
+                              loadImg={loadImg}
+                              setLoading={setLoading}
+                              setNewImg={setNewImg}/>}
 
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel"
