@@ -23,7 +23,7 @@ const PostContentMain = ({title,tags, text, setEndIndicator}) => {
                                              idx={idx}
                                              handleClick={searchTags}/>)}
             </div>
-            <p className='post-text'>{text}</p>
+            <p className='post-text' >{text}</p>
         </div>
     );
 }
