@@ -48,6 +48,11 @@ const PostContentEditor = ({
         setTagToAdd('')
     }
 
+    const sendTag = (e) => {
+        e.preventDefault();
+        addTag();
+    };
+
     useEffect(()=> {
          if (tagActivator) {document.querySelector('.tag-input').focus()}
     }, [tagActivator])
@@ -58,7 +63,7 @@ const PostContentEditor = ({
     return (
         <div className="post-content-main">
 
-            <form className='post-editor'>
+            <form className='post-editor' onSubmit={e=>sendTag(e)}>
                 <div className="post-editor-header">
                     <textarea
                            class='post-editor-title'
