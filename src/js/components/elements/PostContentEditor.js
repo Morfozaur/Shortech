@@ -39,10 +39,8 @@ const PostContentEditor = ({
         tagClass === '' ? setTagClass( ' add-tag-new') : setTagClass('');
         if (tagToAdd.length>0) {
             const checker = tagToAdd.toLowerCase();
-            console.log(checker)
             if (!newTags.includes(checker)) {
                 setNewTags(tags => [...tags, checker])
-                console.log(newTags)
             }
         }
         setTagToAdd('')
@@ -81,7 +79,7 @@ const PostContentEditor = ({
                     <div className='add-tag'>
                         {tagActivator &&
                         <input type="text"
-                               class="tag-input"
+                               className="tag-input"
                                value={tagToAdd}
                                onChange={e=>changeTag(e)}/>}
                         <i className={`fas fa-plus-circle add-tag-ico${tagClass}`} onClick={e=>addTag(e)}/>

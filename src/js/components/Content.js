@@ -12,18 +12,10 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
 
     const dispatch = useDispatch();
 
-    const postList = useSelector(state => state.sortedPosts.posts);
-    const lastPost = useSelector(state => state.lastPost);
-    const sortedTagPosts = useSelector(state => state.sortedTagPosts)
-    const keyTag = useSelector(state => state.tagSelect);
-
-
-
-    useEffect( () => {
-        if (!hasFetchedData.current) {
-            dispatch(switchDate(setEndIndicator))
-        }
-    }, [dispatch, setEndIndicator])
+    let postList = useSelector(state => state.sortedPosts.posts);
+    let lastPost = useSelector(state => state.lastPost);
+    let sortedTagPosts = useSelector(state => state.sortedTagPosts)
+    let keyTag = useSelector(state => state.tagSelect);
 
     const addNew = () => {
         setNewPost(!newPost);
@@ -40,6 +32,16 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
             }
         }
     }
+
+    useEffect( () => {
+        if (!hasFetchedData.current) {
+            dispatch(switchDate(setEndIndicator))
+        }
+    }, [dispatch, setEndIndicator])
+
+    useEffect(()=> {
+
+    }, [setEndIndicator])
 
     return (
         <>
@@ -67,7 +69,6 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
-                        console.log(postList)
 
                         /// Tu z indeksem trzeba poszaleć
                             return (
@@ -82,7 +83,8 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                                       createPost={false}
                                       editorClass ={"Edytuj"}
                                       setEndIndicator={setEndIndicator}
-                                      isLogged={isLogged}/>
+                                      isLogged={isLogged}
+                                      changeControl={postList}/>
                             )
                         })
                     }

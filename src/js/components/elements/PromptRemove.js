@@ -9,8 +9,7 @@ const PromptRemove = ({setPromptRemove, id}) => {
 
     const removePost = (e) => {
         e.preventDefault();
-        e.target.parentElement.parentElement.previousSibling.remove();
-        e.target.parentElement.parentElement.remove();
+        e.target.parentElement.parentElement.parentElement.parentElement.remove()
         deleteFromFirebase(id)
             .catch((err) => console.error(err))
     };

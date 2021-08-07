@@ -5,7 +5,6 @@ const loadMoreTag = (sortedTagPosts, postList, setEndIndicator) => {
     return (dispatch) => {
         const limiter = postList.length + 4;
         const data = tagListLimiter(sortedTagPosts, limiter)
-        console.log('data', data.length, sortedTagPosts.length)
         if (data.length === sortedTagPosts.length) {setEndIndicator(true)}
         dispatch(fetchPosts(data));
         dispatch(fetchTagArrLength(data.length));
