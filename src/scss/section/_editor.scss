@@ -4,7 +4,6 @@
     flex-direction: row-reverse;
   }
 }
-
 .post-editor {
   display: flex;
   flex-direction: column;
@@ -49,7 +48,6 @@
       width: 50px;
     }
   }
-
   .add-tag {
     display: flex;
     align-items: center;
@@ -66,10 +64,6 @@
       color: $color-third-dark;
     }
   }
-  &-text {
-    //height: 121px;
-  }
-
   @include tablet {
     &-header {
       min-height: 24px;

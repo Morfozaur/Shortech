@@ -1,6 +1,14 @@
 import React from 'react';
 
-const PostButtons = ({id, editor, saveEditedPost, editBtn, setPromptRemove, loadImg, setLoading, setNewImg}) => {
+const PostButtons = ({
+                         id, editor, createPost,
+                         saveEditedPost, editBtn, loadImg,
+                         setPromptRemove, setLoading, setNewImg}) => {
+
+    const deleteClass = "btn btn-post alert";
+    const deactive = () => {
+        if (!createPost) {setPromptRemove(true)}
+    };
     return (
         <div className="post-buttons">
             {editor &&
@@ -19,8 +27,8 @@ const PostButtons = ({id, editor, saveEditedPost, editBtn, setPromptRemove, load
                     onClick={e=>saveEditedPost(e)}>{editBtn}</button>
 
             {editor &&
-            <button className="btn btn-post alert"
-                    onClick={()=>setPromptRemove(true)}>Usuń</button>}
+            <button className={createPost ? `${deleteClass} deactive` : deleteClass}
+                    onClick={deactive}>Usuń</button>}
         </div>
     );
 };

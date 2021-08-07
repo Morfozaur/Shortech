@@ -1,6 +1,6 @@
 import sortBy from "array-sort-by";
 
-const customSort = (res, num) => {
+const customSort = (res) => {
     const posts = res.docs.map(post => post.data());
     const ids = res.docs.map(el => {
         return {id:el.id, date:el.data().date}

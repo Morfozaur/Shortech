@@ -1,4 +1,6 @@
-import firebase from "firebase"
+import firebase from 'firebase';
+import 'firebase/database';
+import 'firebase/storage';
 const config = {
     apiKey: "AIzaSyC_VJpU_qZQBVzuYv7KrxT_Xpx5OsVZSjs",
     authDomain: "shortech-de128.firebaseapp.com",

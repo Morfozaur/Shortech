@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Post from "./elements/Post";
 import {useDispatch, useSelector} from "react-redux";
 import {switchDate} from "../redux/actions/switchDate";
 import {loadMoreData} from "../redux/actions/loadMoreData";
 import {loadMoreTag} from "../redux/actions/loadMoreTag";
 import ArrowScroll from "./elements/ArrowScroll";
-import {fetchTagLoader} from "../redux/actions/allFetchers";
 
 const Content = ({endIndicator, setEndIndicator, isLogged}) => {
+    const hasFetchedData = useRef(false)
     const [newPost, setNewPost] = useState(false)
-
 
     const dispatch = useDispatch();
 
@@ -17,13 +16,14 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
     const lastPost = useSelector(state => state.lastPost);
     const sortedTagPosts = useSelector(state => state.sortedTagPosts)
     const keyTag = useSelector(state => state.tagSelect);
-    const filterType = useSelector(state => state.tagSelect);
 
 
 
     useEffect( () => {
-        dispatch(switchDate(setEndIndicator));
-    }, [])
+        if (!hasFetchedData.current) {
+            dispatch(switchDate(setEndIndicator))
+        }
+    }, [dispatch, setEndIndicator])
 
     const addNew = () => {
         setNewPost(!newPost);
@@ -67,6 +67,9 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
+                        console.log(postList)
+
+                        /// Tu z indeksem trzeba poszaleć
                             return (
                                 <Post key={id}
                                       id={id}

@@ -27,4 +27,11 @@
       font-size: .825rem;
     }
   }
+  &.deactive {
+    background-color: $color-third;
+    border-color: $color-third;
+    &:active {
+      transform: none;
+    }
+  }
 }
