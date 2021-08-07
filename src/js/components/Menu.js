@@ -13,7 +13,7 @@ const Menu = ({setEndIndicator}) => {
     const sortByDate = () => {
         if (history.location.pathname !=='/') {history.push('/')}
         dispatch(switchDate(setEndIndicator));
-        dispatch(fetchTagLoader('date'))
+        dispatch(fetchTagLoader('date'));
     };
 
     const searchInput = (e) => {

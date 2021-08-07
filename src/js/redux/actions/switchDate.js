@@ -7,12 +7,12 @@ const switchDate = (setEndIndicator) => {
             .orderBy('date', 'desc')
             .limit(4)
             .get()
-
             .then(res => {
                 setEndIndicator(false)
                 const resLength = res.docs.length;
                 const lastDataKey = res.docs[resLength -1].data().date;
                 const data = res.docs.map(post => [post.id,post.data()]);
+                console.log(data)
                 dispatch(fetchPosts(data));
                 dispatch(fetchLastPost(lastDataKey));
             })

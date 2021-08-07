@@ -8,7 +8,6 @@ const switchTag = (key, setEndIndicator) => {
         db.collection('articles')
             .where('tags', 'array-contains', key)
             .get()
-
             .then(res => {
                 setEndIndicator(false)
                 const allTaggedPosts = customSort(res);
@@ -22,7 +21,6 @@ const switchTag = (key, setEndIndicator) => {
             .catch(err => {
                 dispatch(fetchError(err.message))
             })
-
     }
 };
 

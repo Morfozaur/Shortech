@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import autosize from "autosize/dist/autosize";
 
-import Alert from "./Alert";
 import {createInFirebase, updateInFirebase, uploadImg} from "../../firebaseFunc";
-import PromptRemove from "./PromptRemove";
 import {customDate} from "../../customDate";
 import PostButtons from "./PostButtons";
 import PostImage from "./PostImage";
 import PostContent from "./PostContent";
+import PromptSection from "./PromptSection";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
@@ -19,7 +18,8 @@ const Post = ({
     const [editBtn, setEditBtn] = useState(editorClass);
     const [textareaResizer, setTextareaResizer] = useState('');
 
-    const [alert, setAlert] = useState(false);
+    const [promptAlert, setPromptAlert] = useState(false);
+    const [promptRemove, setPromptRemove] = useState(false);
 
     const [currTitle, setCurrTitle] = useState(title);
     const [currTags, setCurrTags] = useState(tags);
@@ -35,8 +35,6 @@ const Post = ({
 
     const [loading, setLoading] = useState(0)
     const [tagClass, setTagClass] = useState('');
-
-    const [promptRemove, setPromptRemove] = useState(false);
 
     const [titleErr, setTitleErr] = useState(false);
     const [tagsErr, setTagsErr] = useState(false);
@@ -80,14 +78,13 @@ const Post = ({
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post')
         setTextareaResizer(e.target.parentElement.parentElement);
-        console.log(textareaResizer, 'bla')
     };
 
     const cancelEdition = () => {
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
-        setAlert(false);
+        setPromptAlert(false);
         setPromptRemove(false);
         if (createPost) {
             addNew()
@@ -107,7 +104,10 @@ const Post = ({
         setCurrText(newText);
         setCurrImg(newImg);
         modifyButtons(e);
-        setAlert(false)
+        setPromptAlert(false);
+        setPromptRemove(false);
+
+        console.log(currTitle, newTitle, title)
     };
 
     const saveEditedPost = (e) => {
@@ -144,7 +144,7 @@ const Post = ({
                         });
                 }
             } else {
-                setAlert(true)
+                setPromptAlert(true);
             }
         }
     };
@@ -156,9 +156,8 @@ const Post = ({
 
     return (
         <>
-            {alert &&
-            <Alert title={titleErr} tags={tagsErr} text={textErr} img={imgErr}/>}
             <div className={webHighlight ? `${postClass} highlighted` : `${postClass}`}>
+                <div className='post-wrapper'>
                 <PostContent editor={editor} date={date} createPost={createPost}
                              currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
                              currTags={currTags} newTags={newTags} setNewTags={setNewTags}
@@ -172,23 +171,30 @@ const Post = ({
                            webHighlight={webHighlight}
                            setWebHighlight={setWebHighlight}/>
 
+                </div>
+
                 {isLogged && <PostButtons id={id}
-                              editor={editor}
-                              saveEditedPost={saveEditedPost}
-                              editBtn={editBtn}
-                              setPromptRemove={setPromptRemove}
-                              loadImg={loadImg}
-                              setLoading={setLoading}
-                              setNewImg={setNewImg}/>}
+                                          editor={editor}
+                                          saveEditedPost={saveEditedPost}
+                                          editBtn={editBtn}
+                                          setPromptRemove={setPromptRemove}
+                                          loadImg={loadImg}
+                                          setLoading={setLoading}
+                                          setNewImg={setNewImg}
+                                          createPost={createPost}/>}
 
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel"
                    onClick={cancelEdition}/>}
+
+                {(promptAlert || promptRemove) &&
+                <PromptSection id={id} promptAlert={promptAlert}
+                               promptRemove={promptRemove} setPromptRemove={setPromptRemove}
+                               titleErr={titleErr} tagsErr={tagsErr}
+                               textErr={textErr} imgErr={imgErr}/>}
             </div>
-            {promptRemove &&
-            <PromptRemove id={id} setPromptRemove={setPromptRemove}/>}
         </>
     );
-}
+};
 
 export default Post;

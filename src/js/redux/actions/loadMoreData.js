@@ -8,7 +8,6 @@ const loadMoreData = (lastState, postList, setEndIndicator) => {
             .startAfter(lastState)
             .limit(4)
             .get()
-
             .then(res => {
                 const resLength = res.docs.length;
                 if (resLength > 0) {

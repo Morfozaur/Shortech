@@ -2,24 +2,19 @@ import {db} from "./firebase";
 import firebase from "firebase";
 
 // Edit functions
-const pushToFirebase = () => {
-
-};
 
 const updateInFirebase = async (id, post) => {
     const fetchedPost = db.collection('articles').doc(id);
-    const res = await fetchedPost.update(post);
+    await fetchedPost.update(post);
 };
 
 const createInFirebase = async (post) => {
-    const fetchedPost = await db.collection('articles').add(post);
+    await db.collection('articles').add(post);
 };
 
 const deleteFromFirebase = async (id) => {
-    const deletePost = await db.collection('articles').doc(id).delete()
-        .catch(err => {
-            console.error(err)
-        })
+    await db.collection('articles').doc(id).delete()
+        .catch(err => {console.error(err)})
 };
 
 const uploadImg = (e, setLoading, setNewImg) => {
@@ -31,10 +26,7 @@ const uploadImg = (e, setLoading, setNewImg) => {
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setLoading(percentage);
         },
-
-        (error) =>{
-
-        },
+        (error) =>{console.error(error.message)},
         () =>{
             task.snapshot.ref.getDownloadURL().then((url) => {
                 setNewImg(url);
