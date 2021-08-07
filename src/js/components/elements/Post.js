@@ -107,7 +107,6 @@ const Post = ({
         setPromptAlert(false);
         setPromptRemove(false);
 
-        console.log(currTitle, newTitle, title)
     };
 
     const saveEditedPost = (e) => {

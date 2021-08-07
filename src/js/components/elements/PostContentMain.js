@@ -6,9 +6,6 @@ import {fetchTagLoader} from "../../redux/actions/allFetchers";
 
 const PostContentMain = ({title,tags, text, setEndIndicator}) => {
 
-    console.log(title, 'pozmianie')
-
-
     const dispatch = useDispatch();
     const searchTags = e => {
         const tag = e.target.innerHTML;

@@ -30,7 +30,6 @@ const uploadImg = (e, setLoading, setNewImg) => {
         () =>{
             task.snapshot.ref.getDownloadURL().then((url) => {
                 setNewImg(url);
-                console.log(url)
             });
         }
     )
