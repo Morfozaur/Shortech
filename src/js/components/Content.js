@@ -20,7 +20,6 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     let keyTag = useSelector(state => state.tagSelected.tag);
     let dateSelect = useSelector(state => state.tagSelected.isDate);
 
-    console.log(keyTag, dateSelect)
     const addNew = () => {
         setNewPost(!newPost);
     }
@@ -98,7 +97,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                 </section>
             {(postList.length === 0 && isLoaded) &&
             <div className='search-fault'>
-                <h2 onClick={()=>console.log(isLoaded)}>Błąd wyszukiwania</h2>
+                <h2>Błąd wyszukiwania</h2>
                 <p>Niestety, nie udało się znaleźć wpisów oznaczonych tagiem <span>{keyTag}</span>.</p>
                 <button className='btn' onClick={toMain}>Strona główna</button>
             </div>}

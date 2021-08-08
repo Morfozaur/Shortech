@@ -142,7 +142,6 @@ const Post = ({
     const pushToDemo = (e) => {
         if (createPost) {
             setPromptDemo(true);
-            console.log('penidaosd', promptDemo)
         } else {
             updateHTML(e);
         }
