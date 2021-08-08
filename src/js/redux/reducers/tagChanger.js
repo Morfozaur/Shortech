@@ -1,4 +1,4 @@
-const infiniteLoaderTag = (state = 'date', action) => {
+const tagChanger = (state = {tag: 'date', isDate: true}, action) => {
     switch (action.type) {
         case 'CHANGE-TAG':
             return action.payload
@@ -7,4 +7,4 @@ const infiniteLoaderTag = (state = 'date', action) => {
     }
 };
 
-export {infiniteLoaderTag}
+export {tagChanger}

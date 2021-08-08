@@ -14,8 +14,8 @@ const fetchLastPost = data => {
     return {type: 'LAST-POSTS', payload: data}
 }
 
-const fetchTagLoader = data => {
-    return {type: 'CHANGE-TAG', payload: data}
+const fetchTagLoader = (data, isDate) => {
+    return {type: 'CHANGE-TAG', payload: {tag: data, isDate}}
 }
 
 const fetchTagArr = data => {

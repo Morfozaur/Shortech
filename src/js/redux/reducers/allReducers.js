@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import {isLogged} from "./isLogged";
 import {postsList} from "./postsList";
 import {lastPost} from "./lastPost";
-import {infiniteLoaderTag} from "./infiniteLoaderTag";
+import {tagChanger} from "./tagChanger";
 import {lastTagPost} from "./lastTagPost";
 import {postsTagList} from "./postsTagList";
 import {filterType} from "./filterType";
@@ -13,7 +13,7 @@ const allReducers = combineReducers({
     demo: isDemo,
     sortedPosts: postsList,
     lastPost,
-    tagSelect: infiniteLoaderTag,
+    tagSelected: tagChanger,
     sortedTagPosts: postsTagList,
     lastTagPost,
     filterType
