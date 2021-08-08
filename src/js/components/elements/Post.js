@@ -7,10 +7,11 @@ import PostButtons from "./PostButtons";
 import PostImage from "./PostImage";
 import PostContent from "./PostContent";
 import PromptSection from "./PromptSection";
+import {randomImg} from "../../randomImg";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
-                  createPost, editorClass, addNew, setEndIndicator, isLogged
+                  createPost, editorClass, addNew, setEndIndicator, isLogged, isDemo
 }) => {
 
     const [editor, setEditor] = useState(false);
@@ -20,6 +21,7 @@ const Post = ({
 
     const [promptAlert, setPromptAlert] = useState(false);
     const [promptRemove, setPromptRemove] = useState(false);
+    const [promptDemo, setPromptDemo] = useState(false);
 
     const [currTitle, setCurrTitle] = useState(title);
     const [currTags, setCurrTags] = useState(tags);
@@ -106,7 +108,44 @@ const Post = ({
         modifyButtons(e);
         setPromptAlert(false);
         setPromptRemove(false);
+    };
 
+    const pushToFirebase = (e) => {
+        const postObj = {
+            title: newTitle,
+            tags: newTags,
+            text: newText,
+            img: newImg,
+            highlight: webHighlight,
+            isNew: createPost
+        }
+        if (createPost) {
+            postObj.date = customDate();
+            createInFirebase(postObj)
+                .then(()=> {
+                    updateHTML(e)
+                })
+                .catch(err => {
+                    console.error(err)
+                });
+        } else {
+            updateInFirebase(id, postObj)
+                .then(()=> {
+                    updateHTML(e)
+                })
+                .catch(err => {
+                    console.error(err)
+                });
+        }
+    };
+
+    const pushToDemo = (e) => {
+        if (createPost) {
+            setPromptDemo(true);
+            console.log('penidaosd', promptDemo)
+        } else {
+            updateHTML(e);
+        }
     };
 
     const saveEditedPost = (e) => {
@@ -114,33 +153,11 @@ const Post = ({
         if (!editor) {
             modifyButtons(e);
         } else {
-
             if (verifyPost()) {
-                const postObj = {
-                    title: newTitle,
-                    tags: newTags,
-                    text: newText,
-                    img: newImg,
-                    highlight: webHighlight,
-                    isNew: createPost
-                }
-                if (createPost) {
-                    postObj.date = customDate()
-                    createInFirebase(postObj)
-                        .then(()=> {
-                            updateHTML(e)
-                        })
-                        .catch(err => {
-                        console.error(err)
-                    });
-                } else {
-                    updateInFirebase(id, postObj)
-                        .then(()=> {
-                            updateHTML(e)
-                        })
-                        .catch(err => {
-                            console.error(err)
-                        });
+                if (isLogged) {
+                    pushToFirebase(e)
+                } else if (isDemo) {
+                    pushToDemo(e)
                 }
             } else {
                 setPromptAlert(true);
@@ -148,9 +165,13 @@ const Post = ({
         }
     };
 
-    const loadImg = (e, setLoading) => {
+    const loadImg = (e) => {
         e.preventDefault();
-        uploadImg(e, setLoading, setNewImg);
+        if (isLogged) {
+            uploadImg(e, setLoading, setNewImg);
+        } else if (isDemo) {
+            setNewImg(randomImg)
+        }
     };
 
     return (
@@ -172,25 +193,24 @@ const Post = ({
 
                 </div>
 
-                {isLogged && <PostButtons id={id}
-                                          editor={editor}
-                                          saveEditedPost={saveEditedPost}
-                                          editBtn={editBtn}
-                                          setPromptRemove={setPromptRemove}
-                                          loadImg={loadImg}
-                                          setLoading={setLoading}
-                                          setNewImg={setNewImg}
-                                          createPost={createPost}/>}
+                {(isLogged || isDemo) &&
+                <PostButtons id={id}
+                             editor={editor}
+                             saveEditedPost={saveEditedPost}
+                             editBtn={editBtn}
+                             setPromptRemove={setPromptRemove}
+                             loadImg={loadImg} isDemo={isDemo}
+                             createPost={createPost}/>}
 
                 {editor &&
                 <i className="fas fa-times-circle fa-lg cancel"
                    onClick={cancelEdition}/>}
 
-                {(promptAlert || promptRemove) &&
-                <PromptSection id={id} promptAlert={promptAlert}
+                {(promptAlert || promptRemove || promptDemo) &&
+                <PromptSection id={id} promptAlert={promptAlert} isDemo={isDemo}
                                promptRemove={promptRemove} setPromptRemove={setPromptRemove}
                                titleErr={titleErr} tagsErr={tagsErr}
-                               textErr={textErr} imgErr={imgErr}/>}
+                               textErr={textErr} imgErr={imgErr} promptDemo={promptDemo}/>}
             </div>
         </>
     );

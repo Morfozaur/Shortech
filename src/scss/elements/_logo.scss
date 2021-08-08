@@ -1,7 +1,16 @@
 .logo {
+  position: relative;
   user-select: none;
   font-family: Staatliches, sans-serif;
   color: $color-third;
+  .demo-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-40%);
+    color: $color-third;
+    font-size: .8rem;
+  }
   span {
     color: white;
     -webkit-text-stroke: 1px $color-third;

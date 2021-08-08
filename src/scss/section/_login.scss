@@ -1,8 +1,6 @@
 .login {
-  width: 340px;
-  height: 210px;
   margin:3em;
-  padding: 1.3em 2.6em;
+  padding: 1.3em;
   background: $color-second;
   border: 1px solid $color-third;
   border-radius: 5px;
@@ -22,10 +20,13 @@
       align-self: center;
       margin-bottom: 1em;
     }
+    label {
+      margin-right: .6em;
+    }
     input {
       width: 200px;
       height: 2rem;
-      margin-left: .5em;
+      margin-top: .5em;
       padding: .5em;
       border: 2px solid white;
       text-align: left;
@@ -39,6 +40,13 @@
   &-fields {
     display: flex;
     flex-direction: column;
+    gap: 1em;
+  }
+  &-info {
+    max-width: 360px;
+  }
+  &-buttons {
+    display: flex;
     gap: 1em;
   }
   &-btn {

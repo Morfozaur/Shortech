@@ -10,8 +10,9 @@ import {fetchLog} from "../redux/actions/allFetchers";
 
 function App() {
     const [endIndicator, setEndIndicator] = useState(false);
-    const dispatch = useDispatch()
-    const isLogged = useSelector(state => state.log)
+    const dispatch = useDispatch();
+    const isLogged = useSelector(state => state.log);
+    const isDemo = useSelector(state => state.demo);
 
     firebase.auth().onAuthStateChanged(user => {
         if (user) {dispatch(fetchLog(true));}
@@ -27,7 +28,7 @@ function App() {
               <Route exact path='/'>
                   <Content endIndicator={endIndicator}
                            setEndIndicator={setEndIndicator}
-                           isLogged={isLogged}/>
+                           isLogged={isLogged} isDemo={isDemo}/>
               </Route>
               <Route path='/login' component={Login}/>
           </Switch>

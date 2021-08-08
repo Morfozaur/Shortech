@@ -59,6 +59,9 @@
       &.delete {
         background: $color-cancel;
       }
+      &.demo {
+        background: $color-null;
+      }
     }
   }
   &-date {

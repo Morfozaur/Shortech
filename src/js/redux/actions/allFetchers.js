@@ -34,6 +34,10 @@ const fetchLog = data => {
     return {type: 'LOG-ACTION', payload:data}
 }
 
+const fetchDemo = data => {
+    return {type: 'DEMO', payload:data}
+}
+
 export {
     fetchLoading,
     fetchPosts,
@@ -43,4 +47,5 @@ export {
     fetchTagArr,
     fetchTagArrLength,
     fetchFilterType,
-    fetchLog}
+    fetchLog,
+    fetchDemo}

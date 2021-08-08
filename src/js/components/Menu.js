@@ -22,8 +22,10 @@ const Menu = ({setEndIndicator}) => {
 
     const submit = (e) => {
         e.preventDefault();
-        dispatch(switchTag(searchText, setEndIndicator));
-        dispatch(fetchTagLoader(searchText))
+        if (searchText.length > 0) {
+            dispatch(switchTag(searchText, setEndIndicator));
+            dispatch(fetchTagLoader(searchText))
+        }
     };
 
     return (
