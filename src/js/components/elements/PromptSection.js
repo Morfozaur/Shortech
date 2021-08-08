@@ -1,16 +1,19 @@
 import React from 'react';
 import Alert from "./Alert";
 import PromptRemove from "./PromptRemove";
+import PromptDemo from "./PromptDemo";
 
 const PromptSection = ({
                            id, promptAlert, promptRemove, setPromptRemove,
-                           titleErr, tagsErr, textErr, imgErr}) => {
+                           titleErr, tagsErr, textErr, imgErr, isDemo, promptDemo}) => {
     return (
         <div className='prompt-section'>
             {promptAlert &&
             <Alert titleErr={titleErr} tagsErr={tagsErr} textErr={textErr} imgErr={imgErr}/>}
             {promptRemove &&
-            <PromptRemove id={id} setPromptRemove={setPromptRemove}/>}
+            <PromptRemove id={id} setPromptRemove={setPromptRemove} isDemo={isDemo}/>}
+            {promptDemo &&
+            <PromptDemo/>}
         </div>
     );
 }

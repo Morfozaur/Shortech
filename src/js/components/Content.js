@@ -5,10 +5,11 @@ import {switchDate} from "../redux/actions/switchDate";
 import {loadMoreData} from "../redux/actions/loadMoreData";
 import {loadMoreTag} from "../redux/actions/loadMoreTag";
 import ArrowScroll from "./elements/ArrowScroll";
+import {fetchTagLoader} from "../redux/actions/allFetchers";
 
-const Content = ({endIndicator, setEndIndicator, isLogged}) => {
-    const hasFetchedData = useRef(false)
-    const [newPost, setNewPost] = useState(false)
+const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
+    const hasFetchedData = useRef(false);
+    const [newPost, setNewPost] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -33,6 +34,11 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
         }
     }
 
+    const toMain = () => {
+        dispatch(switchDate(setEndIndicator));
+        dispatch(fetchTagLoader('date'));
+    };
+
     useEffect( () => {
         if (!hasFetchedData.current) {
             dispatch(switchDate(setEndIndicator))
@@ -45,7 +51,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
 
     return (
         <>
-            {isLogged &&
+            {(isLogged || isDemo) &&
             <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>}
 
                 <div className="sort-info">
@@ -55,7 +61,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                 </div>
                 <section className='content-section'>
 
-                    {(newPost && isLogged) &&
+                    {(newPost && (isLogged || isDemo)) &&
                     <Post title={''}
                           text={''}
                           img={''}
@@ -64,13 +70,12 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                           createPost={true}
                           editorClass={'Zapisz'}
                           isLogged={isLogged}
+                          isDemo={isDemo}
                           addNew={addNew}/>}
 
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
-
-                        /// Tu z indeksem trzeba poszaleć
                             return (
                                 <Post key={id}
                                       id={id}
@@ -84,12 +89,19 @@ const Content = ({endIndicator, setEndIndicator, isLogged}) => {
                                       editorClass ={"Edytuj"}
                                       setEndIndicator={setEndIndicator}
                                       isLogged={isLogged}
+                                      isDemo={isDemo}
                                       changeControl={postList}/>
                             )
                         })
                     }
 
                 </section>
+            {postList.length === 0 &&
+            <div className='search-fault'>
+                <h2>Błąd wyszukiwania</h2>
+                <p>Niestety, nie udało się znaleźć wpisów oznaczonych tagiem <span>{keyTag}</span>.</p>
+                <button className='btn' onClick={toMain}>Strona główna</button>
+            </div>}
             {postList.length > 3 &&
             <ArrowScroll endStream={endIndicator} scroll={scroll}/>}
         </>

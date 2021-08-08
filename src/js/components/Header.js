@@ -6,14 +6,23 @@ import {useHistory} from "react-router-dom";
 const Header = ({setEndIndicator}) => {
 
     const history = useHistory();
-    const toLogin = () => history.push('/login')
+    const toLogin = () => {
+        if (history.location.pathname !=='/login') {
+            history.push('/login')
+        }
+    }
 
-    const isLogged = useSelector(state => state.log)
+    const isLogged = useSelector(state => state.log);
+    const isDemo = useSelector(state => state.demo);
     const icoClass = 'fas fa-power-off login-ico';
 
     return (
         <header className='header'>
-            <h1 className='logo'>SHOR<span>TECH<i className={isLogged ? `${icoClass} logout`: icoClass} onClick={toLogin}/></span></h1>
+
+            <h1 className='logo'>
+                {isDemo && <span className='demo-tag'>Demo</span>}
+                SHOR<span>TECH<i className={(isLogged || isDemo) ? `${icoClass} logout`: icoClass} onClick={toLogin}/></span>
+            </h1>
             <Menu setEndIndicator={setEndIndicator}/>
         </header>
     );

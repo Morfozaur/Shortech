@@ -5,7 +5,6 @@ const lastPost = (state = '', action) => {
         default:
             return state;
     }
-
 };
 
 export {lastPost}

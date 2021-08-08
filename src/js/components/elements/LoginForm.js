@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import firebase from "firebase";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {fetchDemo} from "../../redux/actions/allFetchers";
 
 const LoginForm = () => {
     const [user, setUser] = useState('');
@@ -8,12 +10,19 @@ const LoginForm = () => {
 
     const history = useHistory();
     const auth = firebase.auth();
+    const dispatch = useDispatch();
+
     const logMe = async (e) => {
         e.preventDefault();
         await auth.signInWithEmailAndPassword(user, pass)
             .then( () => history.push('/'))
             .catch((err) => console.error(err.message))
     }
+    
+    const logDemo = (e) => {
+        e.preventDefault()
+        dispatch(fetchDemo(true))
+    };
 
     const handleUser = (e) => setUser(e.target.value);
     const handlePass = (e) => setPass(e.target.value);
@@ -40,7 +49,10 @@ const LoginForm = () => {
                            onChange={e=>handlePass(e)}/>
                 </div>
             </div>
-            <button className='btn login-btn' onClick={e=>logMe(e)}>Zaloguj</button>
+            <div className="login-buttons">
+                <button className='btn login-btn' onClick={e=>logDemo(e)}>Demo</button>
+                <button className='btn login-btn' onClick={e=>logMe(e)}>Zaloguj</button>
+            </div>
 
         </form>
     );

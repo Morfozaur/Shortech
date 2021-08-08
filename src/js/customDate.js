@@ -2,7 +2,7 @@ const customDate = () => {
     const date = new Date();
     const y = date.getFullYear();
     let m = date.getMonth() + 1;
-    let d = date.getDay() +1 ;
+    let d = date.getDate();
     let h = date.getHours();
     let min = date.getMinutes();
     let s = date.getSeconds();

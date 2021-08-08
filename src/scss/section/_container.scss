@@ -6,6 +6,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  .search-fault {
+    margin-top: 2em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    align-items: center;
+    span {
+      font-family: Staatliches, sans-serif;
+    }
+  }
   @include smart {
     padding: 2em 0;
   }
