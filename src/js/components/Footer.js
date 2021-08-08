@@ -3,6 +3,11 @@ import {useHistory} from "react-router-dom";
 
 const Footer = () => {
     const history = useHistory();
+
+    const toAbout = () => {
+        history.push('/about');
+        window.scrollTo(0, 0);
+    }
     return (
         <footer>
             <div className="copy">
@@ -11,7 +16,7 @@ const Footer = () => {
 
             <div className="contact">
                 <p className='copy-link'
-                   onClick={()=>history.push('/about')}>O Shortech</p>
+                   onClick={toAbout}>O Shortech</p>
             </div>
         </footer>
     );
