@@ -25,6 +25,7 @@
     border: 2px solid $color-third;
     padding:0.2em 0.4em;
     width: 155px;
+    min-width:100px;
     &:focus {
       outline: none;
       border-bottom: 2px solid $color-third-dark;
