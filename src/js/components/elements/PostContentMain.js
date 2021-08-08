@@ -10,7 +10,7 @@ const PostContentMain = ({title,tags, text, setEndIndicator}) => {
     const searchTags = e => {
         const tag = e.target.innerHTML;
         dispatch(switchTag(tag, setEndIndicator));
-        dispatch(fetchTagLoader(tag))
+        dispatch(fetchTagLoader(tag, false));
     }
 
 

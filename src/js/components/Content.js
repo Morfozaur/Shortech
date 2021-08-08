@@ -10,14 +10,17 @@ import {fetchTagLoader} from "../redux/actions/allFetchers";
 const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     const hasFetchedData = useRef(false);
     const [newPost, setNewPost] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const dispatch = useDispatch();
 
     let postList = useSelector(state => state.sortedPosts.posts);
     let lastPost = useSelector(state => state.lastPost);
     let sortedTagPosts = useSelector(state => state.sortedTagPosts)
-    let keyTag = useSelector(state => state.tagSelect);
+    let keyTag = useSelector(state => state.tagSelected.tag);
+    let dateSelect = useSelector(state => state.tagSelected.isDate);
 
+    console.log(keyTag, dateSelect)
     const addNew = () => {
         setNewPost(!newPost);
     }
@@ -26,7 +29,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
         if (endIndicator) {
             window.scrollTo(0, 0)
         } else {
-            if (keyTag ==='date') {
+            if (dateSelect) {
                 dispatch(loadMoreData(lastPost, postList, setEndIndicator))
             } else {
                 dispatch(loadMoreTag(sortedTagPosts, postList, setEndIndicator))
@@ -36,7 +39,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
 
     const toMain = () => {
         dispatch(switchDate(setEndIndicator));
-        dispatch(fetchTagLoader('date'));
+        dispatch(fetchTagLoader("date", true));
     };
 
     useEffect( () => {
@@ -45,18 +48,14 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
         }
     }, [dispatch, setEndIndicator])
 
-    useEffect(()=> {
-
-    }, [setEndIndicator])
-
     return (
         <>
             {(isLogged || isDemo) &&
             <i className="fas fa-plus-circle fa-2x add-new" onClick={e=> addNew(e)}/>}
 
                 <div className="sort-info">
-                    {keyTag === 'date' && <h4>Najnowsze wpisy:</h4>}
-                    {keyTag !== 'date' && <h4>Wpisy z kagetorii {keyTag}:</h4>}
+                    {dateSelect && <h4>Najnowsze wpisy:</h4>}
+                    {!dateSelect && <h4>Wpisy z kagetorii {keyTag}:</h4>}
                     <hr className='date-line'/>
                 </div>
                 <section className='content-section'>
@@ -76,6 +75,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
+                            if (!isLoaded) {setIsLoaded(true)}
                             return (
                                 <Post key={id}
                                       id={id}
@@ -96,9 +96,9 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     }
 
                 </section>
-            {postList.length === 0 &&
+            {(postList.length === 0 && isLoaded) &&
             <div className='search-fault'>
-                <h2>Błąd wyszukiwania</h2>
+                <h2 onClick={()=>console.log(isLoaded)}>Błąd wyszukiwania</h2>
                 <p>Niestety, nie udało się znaleźć wpisów oznaczonych tagiem <span>{keyTag}</span>.</p>
                 <button className='btn' onClick={toMain}>Strona główna</button>
             </div>}

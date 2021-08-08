@@ -42,3 +42,14 @@ const postDatabase = [
 ]
 
 export {postDatabase}
+
+
+// [['start'],{title: "Razer Zephyr - gamingowa maska trafiła do fazy testów\n",
+//     text: "Razer Project Hazel to teraz Razer Zephyr. Producent gamingowych gadżetów poinformował, że jego LED-owa maska ochronna wchodzi w etap beta testów.\n" +
+//         "\n" +
+//         "Gadżet trafi do powszechnej dystrybucji w czwartym kwartale 2021 roku, ale już teraz można zapisać się na kolejkę chętnych do przedpremierowych testów urządzenia.\n" +
+//         "\n",
+//     img: 'https://firebasestorage.googleapis.com/v0/b/shortech-de128.appspot.com/o/img%2Fzephyr_teaser.jpeg?alt=media&token=8faf69c7-bbaa-47b3-bd28-4e07b4c91dad',
+//     tags: [],
+//     highlight: true,
+//     date: '2021-07-28T15:30'}]
