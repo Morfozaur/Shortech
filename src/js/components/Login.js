@@ -20,7 +20,7 @@ const Login = () => {
         <div className="login">
             {(isLogged || isDemo) &&
             <div className='login-status'>
-                <h2 onClick={()=>console.log(isDemo, isLogged)}>Zalogowano jako:</h2>
+                <h2>Zalogowano jako:</h2>
                 <h3>{isDemo ? 'Wersja demo' : 'Administrator'}</h3>
                 {isDemo &&
                 <div className='login-info' >

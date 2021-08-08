@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PromptDemo = () => {
-    console.log('penis')
     return (
         <div className='remove-frame'>
             <h2>Zapisanie zablokowane</h2>
