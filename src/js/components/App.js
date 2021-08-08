@@ -5,7 +5,7 @@ import {HashRouter, Route, Switch} from 'react-router-dom';
 import Login from "./Login";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {fetchLog} from "../redux/actions/allFetchers";
 
 function App() {

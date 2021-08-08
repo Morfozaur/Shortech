@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {fetchDemo} from "../../redux/actions/allFetchers";

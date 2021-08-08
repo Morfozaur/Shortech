@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from "./elements/LoginForm";
 import {useDispatch, useSelector} from "react-redux";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
 import {fetchDemo} from "../redux/actions/allFetchers";
 
