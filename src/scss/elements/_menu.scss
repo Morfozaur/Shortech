@@ -14,6 +14,7 @@
     align-items: center;
   }
   &-home, &-glass {
+    cursor: pointer;
     font-size: 1.5em;
     &:active {
       color: $color-third-dark;
@@ -21,13 +22,12 @@
     }
   }
   .search {
-    border: 1px solid $color-third;
-    border-radius: 5px;
+    border: 2px solid $color-third;
     padding:0.2em 0.4em;
-    width: 185px;
+    width: 155px;
     &:focus {
       outline: none;
-      border: 2px solid $color-third-dark;
+      border-bottom: 2px solid $color-third-dark;
     }
   }
   @include smart {

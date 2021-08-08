@@ -42,28 +42,6 @@
      justify-self: flex-end;
     }
   }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-bottom: 7px;
-    &-single {
-      user-select :none;
-      background-color: $color-third;
-      border-radius: 15px;
-      text-transform: uppercase;
-      color: white;
-      font-size: .6em;
-      padding: .6em .9em;
-      height: 21px;
-      &.delete {
-        background: $color-cancel;
-      }
-      &.demo {
-        background: $color-null;
-      }
-    }
-  }
   &-date {
     font-size: .6em;
     color: $color-third;
