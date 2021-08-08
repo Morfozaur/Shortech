@@ -18,7 +18,7 @@ const About = () => {
                 <h2>Shortech</h2>
                 <h4>Opis projektu</h4>
             </div>
-            <p>Shortech jest minimalistyczną witryną mikroblogową zbudowaną w zgodzie z zasadą WYSIWIG (ang. what you see is what you get). W przeciwieństwie do klasycznych systemów CMS tu warstwa administracyjna została scalona z głównym interfejsem. Dzięki temu autor już w momencie komponowania wpisu wie, jak post będzie wyglądał po publikacji.</p>
+            <p>Shortech jest minimalistyczną witryną mikroblogową zbudowaną w zgodzie z zasadą <strong>WYSIWIG</strong> (ang. what you see is what you get). W przeciwieństwie do klasycznych systemów CMS tu warstwa administracyjna została scalona z głównym interfejsem. Dzięki temu autor już w momencie komponowania wpisu wie, jak post będzie wyglądał po publikacji.</p>
             <p>Strona w całości funkcjonuje w oparciu o reactowe komponenty, wykorzystano w niej następujące technologie oraz biblioteki:</p>
             <ul className='about-list'>
                 {features.map(el => <li><strong>{el[0]} - </strong>{el[1]}</li>)}

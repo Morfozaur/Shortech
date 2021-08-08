@@ -11,9 +11,6 @@
   align-items: center;
   &-list {
     color: $color-third-dark;
-    strong {
-      font-weight: 900;
-    }
     li + li {
       margin-top: .5em;
     }
