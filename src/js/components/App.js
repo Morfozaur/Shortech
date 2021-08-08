@@ -3,10 +3,12 @@ import Header from "./Header";
 import Content from "./Content";
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Login from "./Login";
-import {useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import firebase from "firebase/app";
 import {fetchLog} from "../redux/actions/allFetchers";
+import Footer from "./Footer";
+import About from "./About";
 
 function App() {
     const [endIndicator, setEndIndicator] = useState(false);
@@ -22,17 +24,21 @@ function App() {
 
     return (
       <HashRouter>
-        <div className="container">
-          <Header setEndIndicator={setEndIndicator}/>
-          <Switch>
-              <Route exact path='/'>
-                  <Content endIndicator={endIndicator}
-                           setEndIndicator={setEndIndicator}
-                           isLogged={isLogged} isDemo={isDemo}/>
-              </Route>
-              <Route path='/login' component={Login}/>
-          </Switch>
-        </div>
+          <div className="container">
+              <Header setEndIndicator={setEndIndicator}/>
+              <main>
+                  <Switch>
+                      <Route exact path='/'>
+                          <Content endIndicator={endIndicator}
+                                   setEndIndicator={setEndIndicator}
+                                   isLogged={isLogged} isDemo={isDemo}/>
+                      </Route>
+                      <Route path='/login' component={Login}/>
+                      <Route path='/about' component={About}/>
+                  </Switch>
+              </main>
+              <Footer/>
+          </div>
       </HashRouter>
   );
 

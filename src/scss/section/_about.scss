@@ -1,0 +1,22 @@
+.about {
+  min-width: 280px;
+  width: 550px;
+  margin:3em;
+  padding: 1.3em;
+  background: $color-second;
+  border: 1px solid $color-third;
+  border-radius: 5px;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  align-items: center;
+  &-list {
+    color: $color-third-dark;
+    strong {
+      font-weight: 900;
+    }
+    li + li {
+      margin-top: .5em;
+    }
+  }
+}

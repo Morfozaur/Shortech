@@ -4,6 +4,7 @@ input {
   border:none;
   color: $color-third-dark;
   padding: 0;
+  box-shadow: 0 0 0 30px white inset;
   &:focus {
     outline: none;
     border-bottom: 2px solid $color-third-dark;
