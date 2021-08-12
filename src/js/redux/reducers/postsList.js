@@ -13,14 +13,18 @@ const postsList = (state = listInit, action) => {
         }
         case "ERROR":
             return {
+                ...state,
                 loading: false,
                 posts: [],
-                error: action.payload}
+                error: action.payload
+            }
         case 'POSTS':
             return {
+                ...state,
                 loading: false,
                 posts: action.payload,
-                error: ''}
+                error: ''
+            }
         default:
             return state
     }
