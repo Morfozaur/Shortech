@@ -1,5 +1,6 @@
 import {db} from "./firebase";
 import firebase from "./firebase";
+import {randomizeName} from "./randomizeName";
 
 // Edit functions
 
@@ -19,7 +20,8 @@ const deleteFromFirebase = async (id) => {
 
 const uploadImg = (e, setLoading, setNewImg) => {
     const file = e.target.files[0];
-    const storageRef = firebase.storage().ref('img/' + file.name);
+    const fileName = randomizeName(file.name);
+    const storageRef = firebase.storage().ref('img/' + fileName);
     const task = storageRef.put(file);
     task.on('stage_changed',
         (snapshot) => {
