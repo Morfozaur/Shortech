@@ -74,6 +74,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     {postList.length > 0 && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
+                            const sortedTags = tags.sort();
                             if (!isLoaded) {setIsLoaded(true)}
                             return (
                                 <Post key={id}
@@ -81,7 +82,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                                       title={title}
                                       text={text}
                                       img={img}
-                                      tags={tags}
+                                      tags={sortedTags}
                                       highlight={highlight}
                                       date={date}
                                       createPost={false}
