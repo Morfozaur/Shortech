@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from "./elements/LoginForm";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 import LoginInfo from "./elements/LoginInfo";
 
