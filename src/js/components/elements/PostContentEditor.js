@@ -41,12 +41,9 @@ const PostContentEditor = ({
             const toLower = tagToAdd.toLowerCase();
             const checker = toLower.split(",");
             checker.forEach(tag => {
-                console.log('tag clear:',tag)
                 const unspaceTag = tag.replace(/\s{2,}/g, ' ')
                 const clearTag = unspaceTag.trim();
-                console.log('tag prep:',clearTag)
                 if (!newTags.includes(clearTag) && clearTag.length>0) {
-                    console.log('tag',clearTag)
                     setNewTags(tags => [...tags, clearTag])
                 }
             })
