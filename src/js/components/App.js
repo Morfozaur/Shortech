@@ -1,7 +1,7 @@
 import "../../scss/main.scss"
 import Header from "./Header";
 import Content from "./Content";
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from "./Login";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -23,7 +23,7 @@ function App() {
 
 
     return (
-      <HashRouter>
+      <BrowserRouter>
           <div className="container">
               <Header setEndIndicator={setEndIndicator}/>
               <main>
@@ -39,7 +39,7 @@ function App() {
               </main>
               <Footer/>
           </div>
-      </HashRouter>
+      </BrowserRouter>
   );
 
 
