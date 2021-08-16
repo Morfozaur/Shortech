@@ -7,7 +7,7 @@ const About = () => {
         ['FontAwesome','ikony nawigacji'],
         ['React Router','zarządzanie odnośnikami wewnątrz witryny'],
         ['Firebase','przechowywanie wpisów i zdjęć ilustracyjnych, autoryzacja administratora'],
-        ['Redux + redux-thunk','automatyczne, dynamiczne dopasowywanie wysokości pola textarea w edytorze'],
+        ['Redux + redux-thunk','zarządzanie stanem aplikacji'],
         ['Autosize','automatyczne, dynamiczne dopasowywanie wysokości pola textarea w edytorze'],
         ['Array sortBy','sortowanie chronologicznie uporządkowanych postów oznaczonych konkretnym tagiem']
     ]
