@@ -17,8 +17,11 @@
     cursor: pointer;
     font-size: 1.5em;
     &:active {
-      color: $color-third-dark;
+      ;
       transform: scale(.96);
+    }
+    &:hover {
+      color: $color-third;
     }
   }
   .search {
