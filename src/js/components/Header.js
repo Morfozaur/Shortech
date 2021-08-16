@@ -2,7 +2,6 @@ import React from 'react';
 import Menu from "./Menu";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {randomizeName} from "../randomizeName";
 
 const Header = ({setEndIndicator}) => {
 
@@ -13,10 +12,6 @@ const Header = ({setEndIndicator}) => {
         }
     }
 
-    const test = () => {
-        console.log(randomizeName('test'))
-    }
-
     const isLogged = useSelector(state => state.log);
     const isDemo = useSelector(state => state.demo);
     const icoClass = 'fas fa-power-off login-ico';
@@ -24,7 +19,7 @@ const Header = ({setEndIndicator}) => {
     return (
         <header className='header'>
 
-            <h1 className='logo' onClick={e=>test()}>
+            <h1 className='logo'>
                 {isDemo && <span className='demo-tag'>Demo</span>}
                 SHOR<span>TECH<i className={(isLogged || isDemo) ? `${icoClass} logout`: icoClass} onClick={toLogin}/></span>
             </h1>
