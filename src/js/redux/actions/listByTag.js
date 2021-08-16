@@ -3,7 +3,7 @@ import {fetchError, fetchPosts, fetchTagArr, fetchTagArrLength} from "./allFetch
 import {customSort} from "../../customSort";
 import {tagListLimiter} from "../../tagListLimiter";
 
-const switchTag = (key, setEndIndicator) => {
+const listByTag = (key, setEndIndicator) => {
     return (dispatch) => {
         db.collection('articles')
             .where('tags', 'array-contains', key)
@@ -24,4 +24,4 @@ const switchTag = (key, setEndIndicator) => {
     }
 };
 
-export {switchTag}
+export {listByTag}

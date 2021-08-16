@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {switchDate} from "../redux/actions/switchDate";
+import {listByDate} from "../redux/actions/listByDate";
 import {useHistory,} from 'react-router-dom';
 import {useDispatch} from "react-redux";
 import {fetchTagLoader} from "../redux/actions/allFetchers";
-import {switchTag} from "../redux/actions/switchTag";
+import {listByTag} from "../redux/actions/listByTag";
 
 const Menu = ({setEndIndicator}) => {
     const [searchText, setSearchText] = useState('')
@@ -12,7 +12,7 @@ const Menu = ({setEndIndicator}) => {
 
     const sortByDate = () => {
         if (history.location.pathname !=='/') {history.push('/')}
-        dispatch(switchDate(setEndIndicator));
+        dispatch(listByDate(setEndIndicator));
         dispatch(fetchTagLoader("date", true));
     };
 
@@ -23,7 +23,7 @@ const Menu = ({setEndIndicator}) => {
     const submit = (e) => {
         e.preventDefault();
         if (searchText.length > 0) {
-            dispatch(switchTag(searchText, setEndIndicator));
+            dispatch(listByTag(searchText, setEndIndicator));
             dispatch(fetchTagLoader( searchText,  false))
         }
     };

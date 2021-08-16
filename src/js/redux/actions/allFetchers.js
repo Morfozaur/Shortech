@@ -26,10 +26,6 @@ const fetchTagArrLength = data => {
     return {type: 'LAST-TAG-POSTS', payload: data}
 }
 
-const fetchFilterType = data => {
-    return {type: 'FILTER', payload:data}
-}
-
 const fetchLog = data => {
     return {type: 'LOG-ACTION', payload:data}
 }
@@ -46,6 +42,5 @@ export {
     fetchTagLoader,
     fetchTagArr,
     fetchTagArrLength,
-    fetchFilterType,
     fetchLog,
     fetchDemo}

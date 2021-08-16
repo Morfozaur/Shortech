@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Post from "./elements/Post";
 import {useDispatch, useSelector} from "react-redux";
-import {switchDate} from "../redux/actions/switchDate";
-import {loadMoreData} from "../redux/actions/loadMoreData";
+import {listByDate} from "../redux/actions/listByDate";
+import {loadMoreDate} from "../redux/actions/loadMoreDate";
 import {loadMoreTag} from "../redux/actions/loadMoreTag";
 import ArrowScroll from "./elements/ArrowScroll";
 import {fetchTagLoader} from "../redux/actions/allFetchers";
@@ -29,7 +29,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
             window.scrollTo(0, 0)
         } else {
             if (dateSelect) {
-                dispatch(loadMoreData(lastPost, postList, setEndIndicator))
+                dispatch(loadMoreDate(lastPost, postList, setEndIndicator))
             } else {
                 dispatch(loadMoreTag(sortedTagPosts, postList, setEndIndicator))
             }
@@ -37,13 +37,13 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     }
 
     const toMain = () => {
-        dispatch(switchDate(setEndIndicator));
+        dispatch(listByDate(setEndIndicator));
         dispatch(fetchTagLoader("date", true));
     };
 
     useEffect( () => {
         if (!hasFetchedData.current) {
-            dispatch(switchDate(setEndIndicator))
+            dispatch(listByDate(setEndIndicator))
         }
     }, [dispatch, setEndIndicator])
 

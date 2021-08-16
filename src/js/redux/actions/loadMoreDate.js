@@ -1,7 +1,7 @@
 import {db} from "../../firebase";
 import {fetchError, fetchLastPost, fetchPosts} from "./allFetchers";
 
-const loadMoreData = (lastState, postList, setEndIndicator) => {
+const loadMoreDate = (lastState, postList, setEndIndicator) => {
     return (dispatch) => {
         db.collection('articles')
             .orderBy('date', 'desc')
@@ -28,4 +28,4 @@ const loadMoreData = (lastState, postList, setEndIndicator) => {
     }
 };
 
-export {loadMoreData}
+export {loadMoreDate}

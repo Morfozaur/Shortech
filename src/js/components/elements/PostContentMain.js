@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from "./Tag";
 import {useDispatch} from "react-redux";
-import {switchTag} from "../../redux/actions/switchTag";
+import {listByTag} from "../../redux/actions/listByTag";
 import {fetchTagLoader} from "../../redux/actions/allFetchers";
 
 const PostContentMain = ({title,tags, text, setEndIndicator}) => {
@@ -9,7 +9,7 @@ const PostContentMain = ({title,tags, text, setEndIndicator}) => {
     const dispatch = useDispatch();
     const searchTags = e => {
         const tag = e.target.innerHTML;
-        dispatch(switchTag(tag, setEndIndicator));
+        dispatch(listByTag(tag, setEndIndicator));
         dispatch(fetchTagLoader(tag, false));
     }
 
