@@ -108,6 +108,9 @@ const Post = ({
         modifyButtons(e);
         setPromptAlert(false);
         setPromptRemove(false);
+        if (createPost && isLogged) {
+            window.location.reload();
+        }
     };
 
     const pushToFirebase = (e) => {

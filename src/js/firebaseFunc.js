@@ -26,7 +26,7 @@ const uploadImg = (e, setLoading, setNewImg) => {
     task.on('stage_changed',
         (snapshot) => {
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setLoading(percentage);
+            setLoading(percentage.toFixed(2));
         },
         (error) =>{console.error(error.message)},
         () =>{
