@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Alert = ({titleErr, tagsErr, textErr, imgErr}) => {
+const PromptAlert = ({titleErr, tagsErr, textErr, imgErr}) => {
     return (
         <div className='post-alert'>
             <h3>Wpis nie został zapisany. Wykryto następujące błędy:</h3>
@@ -14,4 +14,4 @@ const Alert = ({titleErr, tagsErr, textErr, imgErr}) => {
     );
 }
 
-export default Alert;
+export default PromptAlert;

@@ -1,7 +1,7 @@
 import {db} from "../../firebase";
 import {fetchLastPost, fetchError, fetchPosts} from "./allFetchers";
 
-const switchDate = (setEndIndicator) => {
+const listByDate = (setEndIndicator) => {
     return (dispatch) => {
         db.collection('articles')
             .orderBy('date', 'desc')
@@ -22,4 +22,4 @@ const switchDate = (setEndIndicator) => {
     }
 };
 
-export {switchDate}
+export {listByDate}

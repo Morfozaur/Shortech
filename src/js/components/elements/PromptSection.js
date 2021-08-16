@@ -1,5 +1,5 @@
 import React from 'react';
-import Alert from "./Alert";
+import PromptAlert from "./PromptAlert";
 import PromptRemove from "./PromptRemove";
 import PromptDemo from "./PromptDemo";
 
@@ -9,7 +9,7 @@ const PromptSection = ({
     return (
         <div className='prompt-section'>
             {promptAlert &&
-            <Alert titleErr={titleErr} tagsErr={tagsErr} textErr={textErr} imgErr={imgErr}/>}
+            <PromptAlert titleErr={titleErr} tagsErr={tagsErr} textErr={textErr} imgErr={imgErr}/>}
             {promptRemove &&
             <PromptRemove id={id} setPromptRemove={setPromptRemove} isDemo={isDemo}/>}
             {promptDemo &&

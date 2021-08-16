@@ -2,6 +2,7 @@ import React from 'react';
 import {deleteFromFirebase} from "../../firebaseFunc";
 
 const PromptRemove = ({setPromptRemove, id, isDemo}) => {
+
     const cancel = (e) => {
         e.preventDefault();
         setPromptRemove(false);
@@ -9,7 +10,8 @@ const PromptRemove = ({setPromptRemove, id, isDemo}) => {
 
     const removePost = (e) => {
         e.preventDefault();
-        e.target.parentElement.parentElement.parentElement.parentElement.remove()
+        let current = e.target.parentElement.parentElement.parentElement.parentElement
+        current.style.display = 'none';
         if (!isDemo) {
             deleteFromFirebase(id)
                 .catch((err) => console.error(err))
