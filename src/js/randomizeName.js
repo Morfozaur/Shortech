@@ -10,7 +10,6 @@ const randomizeName = (name) => {
         key = key + randomize();
         keyDate = Math.floor(keyDate/16);
     }
-    console.log(`${name.substr(0, name.length-4)}-${key}-${name.substr(name.length-5, 5)}`)
     return `${name.substr(0, name.length-4)}-${key}-${name.substr(name.length-5, 5)}`
 };
 

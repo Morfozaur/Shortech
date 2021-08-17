@@ -14,7 +14,6 @@ const loadMoreDate = (lastState, postsList, postsNumber, setEndIndicator) => {
                     const lastDataKey = res.docs[resLength -1].data().date;
                     let data = res.docs.map(post => [post.id,post.data()]);
                     const updatedData = [...postsList, ...data];
-                    console.log(postsList.length, postsNumber)
                     if (data.length <4 || postsList.length + 4 === postsNumber) {setEndIndicator(true)}
                     dispatch(fetchPosts(updatedData));
                     dispatch(fetchLastPost(lastDataKey));
