@@ -1,40 +1,28 @@
-const fetchLoading = data => {
-    return {type: 'LOADING', payload: data}
-}
+
+const fetchLoading = data => ({type: 'LOADING', payload: data})
 
 const fetchPosts = data => ({type: 'POSTS', payload: data});
 
-const fetchError = data => {
-    return {type: 'ERROR', payload: data}
-}
+const fetchPostsNumber = data => ({type: 'POSTS-NUMBER', payload: data});
 
-const fetchLastPost = data => {
-    return {type: 'LAST-POSTS', payload: data}
-}
+const fetchError = data => ({type: 'ERROR', payload: data})
 
-const fetchTagLoader = (data, isDate) => {
-    return {type: 'CHANGE-TAG', payload: {tag: data, isDate}}
-}
+const fetchLastPost = data => ({type: 'LAST-POSTS', payload: data})
 
-const fetchTagArr = data => {
-    return {type: 'TAG-POSTS', payload: data}
-}
+const fetchTagLoader = (data, isDate) => ({type: 'CHANGE-TAG', payload: {tag: data, isDate}})
 
-const fetchTagArrLength = data => {
-    return {type: 'LAST-TAG-POSTS', payload: data}
-}
+const fetchTagArr = data => ({type: 'TAG-POSTS', payload: data})
 
-const fetchLog = data => {
-    return {type: 'LOG-ACTION', payload:data}
-}
+const fetchTagArrLength = data => ({type: 'LAST-TAG-POSTS', payload: data})
 
-const fetchDemo = data => {
-    return {type: 'DEMO', payload:data}
-}
+const fetchLog = data => ({type: 'LOG-ACTION', payload:data})
+
+const fetchDemo = data => ({type: 'DEMO', payload:data})
 
 export {
     fetchLoading,
     fetchPosts,
+    fetchPostsNumber,
     fetchError,
     fetchLastPost,
     fetchTagLoader,
