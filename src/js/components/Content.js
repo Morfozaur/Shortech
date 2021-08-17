@@ -22,7 +22,6 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     let dateSelect = useSelector(state => state.tagSelected.isDate);
    // let {isDate, tag: asd} = useSelector({tag} => state.tagSelected);
 
-    console.log(postsNumber)
 
     const addNew = () => {
         setNewPost(!newPost);
