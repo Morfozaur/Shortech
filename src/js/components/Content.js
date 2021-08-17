@@ -19,6 +19,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     let sortedTagPosts = useSelector(state => state.sortedTagPosts)
     let keyTag = useSelector(state => state.tagSelected.tag);
     let dateSelect = useSelector(state => state.tagSelected.isDate);
+   // let {isDate, tag: asd} = useSelector({tag} => state.tagSelected);
 
     const addNew = () => {
         setNewPost(!newPost);
@@ -63,7 +64,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     <Post title={''}
                           text={''}
                           img={''}
-                          tags={[]}
+                          tags={''}
                           highlight={''}
                           createPost={true}
                           editorClass={'Zapisz'}
@@ -71,7 +72,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                           isDemo={isDemo}
                           addNew={addNew}/>}
 
-                    {postList.length > 0 && postList.map((post) => {
+                    {postList.length && postList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
                             const sortedTags = tags.sort();
@@ -96,7 +97,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     }
 
                 </section>
-            {(postList.length === 0 && isLoaded) &&
+            {(!postList.length && isLoaded) &&
             <div className='search-fault'>
                 <h2>Błąd wyszukiwania</h2>
                 <p>Niestety, nie udało się znaleźć wpisów oznaczonych tagiem <span>{keyTag}</span>.</p>

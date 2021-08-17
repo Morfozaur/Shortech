@@ -2,9 +2,7 @@ const fetchLoading = data => {
     return {type: 'LOADING', payload: data}
 }
 
-const fetchPosts = data => {
-    return {type: 'POSTS', payload: data}
-}
+const fetchPosts = data => ({type: 'POSTS', payload: data});
 
 const fetchError = data => {
     return {type: 'ERROR', payload: data}
