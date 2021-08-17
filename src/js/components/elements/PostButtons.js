@@ -20,7 +20,7 @@ const PostButtons = ({
                 {!isDemo &&
                 <input id={id}
                        type='file'
-                       accept="image/png, image/jpeg"
+                       accept="image/jpeg"
                        className='btn-hide'
                        onChange={e=>loadImg(e)}/>}
                 {isDemo &&
