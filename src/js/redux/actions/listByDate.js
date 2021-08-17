@@ -1,5 +1,5 @@
 import {db} from "../../firebase";
-import {fetchLastPost, fetchError, fetchPosts} from "./allFetchers";
+import {fetchLastPost, fetchError, fetchPosts, fetchPostsNumber} from "./allFetchers";
 
 const listByDate = (setEndIndicator) => {
     return (dispatch) => {
@@ -18,7 +18,14 @@ const listByDate = (setEndIndicator) => {
             .catch(err => {
                 dispatch(fetchError(err.message))
             })
-
+        db.collection('count').doc('posts').get()
+            .then(res => {
+                const data = res.data().number;
+                dispatch(fetchPostsNumber(data));
+            })
+            .catch(err => {
+                dispatch(fetchError(err.message))
+            })
     }
 };
 

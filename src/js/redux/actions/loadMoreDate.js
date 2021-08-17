@@ -1,7 +1,7 @@
 import {db} from "../../firebase";
 import {fetchError, fetchLastPost, fetchPosts} from "./allFetchers";
 
-const loadMoreDate = (lastState, postList, setEndIndicator) => {
+const loadMoreDate = (lastState, postsList, postsNumber, setEndIndicator) => {
     return (dispatch) => {
         db.collection('articles')
             .orderBy('date', 'desc')
@@ -13,8 +13,9 @@ const loadMoreDate = (lastState, postList, setEndIndicator) => {
                 if (resLength > 0) {
                     const lastDataKey = res.docs[resLength -1].data().date;
                     let data = res.docs.map(post => [post.id,post.data()]);
-                    const updatedData = [...postList, ...data]
-                    if (data.length <4) {setEndIndicator(true)}
+                    const updatedData = [...postsList, ...data];
+                    console.log(postsList.length, postsNumber)
+                    if (data.length <4 || postsList.length + 4 === postsNumber) {setEndIndicator(true)}
                     dispatch(fetchPosts(updatedData));
                     dispatch(fetchLastPost(lastDataKey));
                 } else {

@@ -14,12 +14,15 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
 
     const dispatch = useDispatch();
 
-    let postList = useSelector(state => state.sortedPosts.posts);
+    let postsList = useSelector(state => state.sortedPosts.posts);
+    let postsNumber = useSelector(state => state.postNumber);
     let lastPost = useSelector(state => state.lastPost);
     let sortedTagPosts = useSelector(state => state.sortedTagPosts)
     let keyTag = useSelector(state => state.tagSelected.tag);
     let dateSelect = useSelector(state => state.tagSelected.isDate);
    // let {isDate, tag: asd} = useSelector({tag} => state.tagSelected);
+
+    console.log(postsNumber)
 
     const addNew = () => {
         setNewPost(!newPost);
@@ -30,21 +33,21 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
             window.scrollTo(0, 0)
         } else {
             if (dateSelect) {
-                dispatch(loadMoreDate(lastPost, postList, setEndIndicator))
+                dispatch(loadMoreDate(lastPost, postsList, postsNumber, setEndIndicator))
             } else {
-                dispatch(loadMoreTag(sortedTagPosts, postList, setEndIndicator))
+                dispatch(loadMoreTag(sortedTagPosts, postsList, setEndIndicator))
             }
         }
     }
 
     const toMain = () => {
-        dispatch(listByDate(setEndIndicator));
+        dispatch(listByDate(setEndIndicator, postsNumber));
         dispatch(fetchTagLoader("date", true));
     };
 
     useEffect( () => {
         if (!hasFetchedData.current) {
-            dispatch(listByDate(setEndIndicator))
+            dispatch(listByDate(setEndIndicator));
         }
     }, [dispatch, setEndIndicator])
 
@@ -72,7 +75,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                           isDemo={isDemo}
                           addNew={addNew}/>}
 
-                    {postList.length && postList.map((post) => {
+                    {postsList.length ? postsList.map((post) => {
                             const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
                             const sortedTags = tags.sort();
@@ -91,19 +94,19 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                                       setEndIndicator={setEndIndicator}
                                       isLogged={isLogged}
                                       isDemo={isDemo}
-                                      changeControl={postList}/>
+                                      changeControl={postsList}/>
                             )
                         })
-                    }
+                    : <></>}
 
                 </section>
-            {(!postList.length && isLoaded) &&
+            {(!postsList.length && isLoaded) &&
             <div className='search-fault'>
                 <h2>Błąd wyszukiwania</h2>
                 <p>Niestety, nie udało się znaleźć wpisów oznaczonych tagiem <span>{keyTag}</span>.</p>
                 <button className='btn' onClick={toMain}>Strona główna</button>
             </div>}
-            {postList.length > 3 &&
+            {postsList.length > 3 &&
             <ArrowScroll endStream={endIndicator} scroll={scroll}/>}
         </>
     );

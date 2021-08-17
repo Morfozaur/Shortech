@@ -22,9 +22,11 @@ const Menu = ({setEndIndicator}) => {
 
     const submit = (e) => {
         e.preventDefault();
-        if (searchText.length > 0) {
-            dispatch(listByTag(searchText, setEndIndicator));
-            dispatch(fetchTagLoader( searchText,  false))
+        if (searchText.length) {
+            const searchTag = searchText.toLowerCase()
+            dispatch(listByTag(searchTag, setEndIndicator));
+            dispatch(fetchTagLoader( searchTag,  false));
+            setSearchText('');
         }
     };
 

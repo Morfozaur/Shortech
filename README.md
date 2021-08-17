@@ -20,3 +20,8 @@ Strona w całości funkcjonuje w oparciu o reactowe komponenty, wykorzystano w n
 `Array sortBy` - sortowanie chronologicznie uporządkowanych postów oznaczonych konkretnym tagiem
 
 Shortech to projekt o dużym potencjale rozwojowym. Szablon można rozbudować o kolejne funkcje zgodne z WYSIWIG takie jak galeria obrazów wyświetlana w miejscu głównego zdjęcia, bibliotekę mediów, formularz modyfikacji daty publikacji, system planowania postów, pola z linkami do źródeł etc.
+
+Do zrobienia:
+https://stackoverflow.com/questions/4215737/convert-array-to-object
+
+https://www.npmjs.com/package/classnames
