@@ -67,7 +67,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                     <Post title={''}
                           text={''}
                           img={''}
-                          tags={''}
+                          tags={[]}
                           highlight={''}
                           createPost={true}
                           editorClass={'Zapisz'}
