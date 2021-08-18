@@ -1,4 +1,4 @@
-const postNumber = (state = 0, action) => {
+const postsNumber = (state = 0, action) => {
     switch (action.type){
         case 'POSTS-NUMBER':
             return action.payload;
@@ -8,4 +8,4 @@ const postNumber = (state = 0, action) => {
 
 };
 
-export {postNumber}
+export {postsNumber}

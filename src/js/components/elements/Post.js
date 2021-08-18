@@ -8,6 +8,9 @@ import PostImage from "./PostImage";
 import PostContent from "./PostContent";
 import PromptSection from "./PromptSection";
 import {randomImg} from "../../randomImg";
+import {useDispatch, useSelector} from "react-redux";
+import {db} from "../../firebase";
+import {fetchPostsNumber} from "../../redux/actions/allFetchers";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
@@ -42,6 +45,9 @@ const Post = ({
     const [tagsErr, setTagsErr] = useState(false);
     const [textErr, setTextErr] = useState(false);
     const [imgErr, setImgErr] = useState(false);
+
+    const dispatch = useDispatch();
+    let postsNumber = useSelector(state => state.postsNumber)
 
     useEffect(()=> {
         if(createPost) {
@@ -126,7 +132,11 @@ const Post = ({
             postObj.date = customDate();
             createInFirebase(postObj)
                 .then(()=> {
-                    updateHTML(e)
+                    updateHTML(e);
+                    postsNumber += 1;
+                    dispatch(fetchPostsNumber(postsNumber));
+                    const updateNumber = db.collection('count').doc('posts');
+                    updateNumber.set({number: postsNumber});
                 })
                 .catch(err => {
                     console.error(err)

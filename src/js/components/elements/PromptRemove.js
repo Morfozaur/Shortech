@@ -1,7 +1,14 @@
 import React from 'react';
 import {deleteFromFirebase} from "../../firebaseFunc";
+import {fetchPostsNumber} from "../../redux/actions/allFetchers";
+import {db} from "../../firebase";
+import {useDispatch, useSelector} from "react-redux";
+
 
 const PromptRemove = ({setPromptRemove, id, isDemo}) => {
+
+    const dispatch = useDispatch();
+    let postsNumber = useSelector(state => state.postsNumber);
 
     const cancel = (e) => {
         e.preventDefault();
@@ -14,7 +21,14 @@ const PromptRemove = ({setPromptRemove, id, isDemo}) => {
         current.style.display = 'none';
         if (!isDemo) {
             deleteFromFirebase(id)
+                .then(()=> {
+                    postsNumber -= 1;
+                    dispatch(fetchPostsNumber(postsNumber));
+                    const updateNumber = db.collection('count').doc('posts');
+                    updateNumber.set({number: postsNumber});
+                })
                 .catch((err) => console.error(err))
+
         }
     };
     return (

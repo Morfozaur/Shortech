@@ -7,13 +7,13 @@ import {lastTagPost} from "./lastTagPost";
 import {postsTagList} from "./postsTagList";
 import {filterType} from "./filterType";
 import {isDemo} from "./isDemo";
-import {postNumber} from "./postNumber";
+import {postsNumber} from "./postsNumber";
 
 const allReducers = combineReducers({
     log: isLogged,
     demo: isDemo,
     sortedPosts: postsList,
-    postNumber,
+    postsNumber,
     lastPost,
     tagSelected: tagChanger,
     sortedTagPosts: postsTagList,
