@@ -1,11 +1,10 @@
 import React from 'react';
+import classNames from "classnames";
 
 const PostButtons = ({
                          isDemo, id, editor, createPost,
                          saveEditedPost, editBtn, loadImg,
                          setPromptRemove}) => {
-
-    const deleteClass = "btn btn-post alert";
 
     const deactive = () => {
         if (!createPost) {setPromptRemove(true)}
@@ -36,7 +35,7 @@ const PostButtons = ({
                     onClick={e=>saveEditedPost(e)}>{editBtn}</button>
 
             {editor &&
-            <button className={createPost ? `${deleteClass} deactive` : deleteClass}
+            <button className={classNames("btn btn-post alert", {'deactive': createPost})}
                     onClick={deactive}>Usuń</button>}
         </div>
     );
