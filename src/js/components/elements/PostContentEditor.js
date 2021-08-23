@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Tag from "./Tag";
+import classNames from "classnames";
 
 const PostContentEditor = ({
                                newTitle, setNewTitle,
@@ -36,7 +37,7 @@ const PostContentEditor = ({
 
     const addTag = () => {
         setTagActivator(!tagActivator);
-        tagClass === '' ? setTagClass( ' add-tag-new') : setTagClass('');
+        setTagClass(!tagClass);
         if (tagToAdd.length>0) {
             const toLower = tagToAdd.toLowerCase();
             const checker = toLower.split(",");
@@ -87,7 +88,7 @@ const PostContentEditor = ({
                                className="tag-input"
                                value={tagToAdd}
                                onChange={e=>changeTag(e)}/>}
-                        <i className={`fas fa-plus-circle add-tag-ico${tagClass}`} onClick={e=>addTag(e)}/>
+                        <i className={classNames('fas fa-plus-circle add-tag-ico', {'add-tag-new' :tagClass})} onClick={e=>addTag(e)}/>
                     </div>
                 </div>
                 <textarea className='post-editor-text'

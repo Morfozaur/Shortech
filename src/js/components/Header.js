@@ -1,5 +1,6 @@
 import React from 'react';
 import Menu from "./Menu";
+import classNames from "classnames";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
@@ -21,7 +22,7 @@ const Header = ({setEndIndicator}) => {
 
             <h1 className='logo'>
                 {isDemo && <span className='demo-tag'>Demo</span>}
-                SHOR<span>TECH<i className={(isLogged || isDemo) ? `${icoClass} logout`: icoClass} onClick={toLogin}/></span>
+                SHOR<span>TECH<i className={classNames(icoClass, {"logout" :(isLogged || isDemo)})} onClick={toLogin}/></span>
             </h1>
             <Menu setEndIndicator={setEndIndicator}/>
         </header>

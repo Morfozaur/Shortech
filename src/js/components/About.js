@@ -9,7 +9,8 @@ const About = () => {
         ['Firebase','przechowywanie wpisów i zdjęć ilustracyjnych, autoryzacja administratora'],
         ['Redux + redux-thunk','zarządzanie stanem aplikacji'],
         ['Autosize','automatyczne, dynamiczne dopasowywanie wysokości pola textarea w edytorze'],
-        ['Array sortBy','sortowanie chronologicznie uporządkowanych postów oznaczonych konkretnym tagiem']
+        ['Array sortBy','sortowanie chronologicznie uporządkowanych postów oznaczonych konkretnym tagiem'],
+        ['className','zarządzanie klasami warunkowymi'],
     ]
 
     return (

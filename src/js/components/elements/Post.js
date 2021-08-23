@@ -39,7 +39,7 @@ const Post = ({
     const [webHighlight, setWebHighlight] = useState(highlight)
 
     const [loading, setLoading] = useState(0)
-    const [tagClass, setTagClass] = useState('');
+    const [tagClass, setTagClass] = useState(false);
 
     const [titleErr, setTitleErr] = useState(false);
     const [tagsErr, setTagsErr] = useState(false);
