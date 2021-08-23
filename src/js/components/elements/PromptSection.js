@@ -3,16 +3,15 @@ import PromptAlert from "./PromptAlert";
 import PromptRemove from "./PromptRemove";
 import PromptDemo from "./PromptDemo";
 
-const PromptSection = ({
-                           id, promptAlert, promptRemove, setPromptRemove,
-                           titleErr, tagsErr, textErr, imgErr, isDemo, promptDemo}) => {
+const PromptSection = ({id, prompts, errorsMsg, isDemo, setPromptRemove}) => {
+
     return (
         <div className='prompt-section'>
-            {promptAlert &&
-            <PromptAlert titleErr={titleErr} tagsErr={tagsErr} textErr={textErr} imgErr={imgErr}/>}
-            {promptRemove &&
-            <PromptRemove id={id} setPromptRemove={setPromptRemove} isDemo={isDemo}/>}
-            {promptDemo &&
+            {prompts.alert &&
+            <PromptAlert errorsMsg={errorsMsg}/>}
+            {prompts.remove &&
+            <PromptRemove id={id} prompts={prompts} setPromptRemove={setPromptRemove} isDemo={isDemo}/>}
+            {prompts.demo &&
             <PromptDemo/>}
         </div>
     );
