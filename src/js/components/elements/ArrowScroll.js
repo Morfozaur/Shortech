@@ -1,9 +1,12 @@
 import React from 'react';
+import classNames from "classnames";
 
 const ArrowScroll = ({endStream, scroll}) => {
-    const arrowClass= 'fa-2x upscroller fas fa-arrow-circle-'
     return (
-        <i className={endStream ? `${arrowClass}up` : `${arrowClass}down`}
+        <i className={classNames(
+            'fa-2x upscroller fas',
+            {'fa-arrow-circle-up': endStream},
+            {'fa-arrow-circle-down': !endStream})}
            onClick={scroll}/>
     );
 }

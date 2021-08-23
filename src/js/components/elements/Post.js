@@ -11,6 +11,7 @@ import {randomImg} from "../../randomImg";
 import {useDispatch, useSelector} from "react-redux";
 import {db} from "../../firebase";
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
+import classNames from "classnames";
 
 const Post = ({
                   id, title, text, img, tags, highlight, date,
@@ -188,7 +189,7 @@ const Post = ({
 
     return (
         <>
-            <div className={webHighlight ? `${postClass} highlighted` : `${postClass}`}>
+            <div className={classNames(postClass, {'highlighted': webHighlight})}>
                 <div className='post-wrapper'>
                 <PostContent editor={editor} date={date} createPost={createPost}
                              currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
