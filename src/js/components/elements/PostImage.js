@@ -1,9 +1,9 @@
 import React from 'react';
+import classNames from "classnames";
 
 const PostImage = ({
                        img, editor, loading,
                        webHighlight, setWebHighlight}) => {
-    const star = 'highlighted-star fa-star'
 
     const starHighlight = () => {
         setWebHighlight(curr => !curr);
@@ -11,7 +11,7 @@ const PostImage = ({
     return (
         <div className='post-img'>
             {editor &&
-            <i className={webHighlight ? `${star} fas` : `${star} far`} onClick={starHighlight}/>}
+            <i className={classNames('highlighted-star fa-star', {'fas': webHighlight}, {'far': !webHighlight})} onClick={starHighlight}/>}
             {(editor && loading > 0) &&
             <p className='post-img-loading'>Wczytywanie: {loading}%</p>}
             <div className="post-img-file" style={{backgroundImage: `url(${img})`}}/>

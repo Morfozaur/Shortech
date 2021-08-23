@@ -1,0 +1,4 @@
+Do zrobienia:
+https://stackoverflow.com/questions/4215737/convert-array-to-object
+
+https://www.npmjs.com/package/classnames
