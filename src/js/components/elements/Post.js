@@ -13,39 +13,27 @@ import {db} from "../../firebase";
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
 import classNames from "classnames";
 
-const Post = ({
-                  id, title, text, img, tags, highlight, date,
-                  createPost, editorClass, addNew, setEndIndicator, isLogged, isDemo
-}) => {
+const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLogged, isDemo}) => {
 
     const [editor, setEditor] = useState(false);
     const [postClass, setPostClass] = useState('post');
     const [editBtn, setEditBtn] = useState(editorClass);
     const [textareaResizer, setTextareaResizer] = useState('');
 
-    const [promptAlert, setPromptAlert] = useState(false);
-    const [promptRemove, setPromptRemove] = useState(false);
-    const [promptDemo, setPromptDemo] = useState(false);
+    const [currPost, setCurrPost] = useState(post)
+    const [newPost, setNewPost] = useState(post)
+    const [errorsMsg, setErrorsMsg] = useState({title:false, tags: false, text: false, img: false})
+    const [prompts, setPrompts] = useState({alert: false, remove: false, demo: false})
 
-    const [currTitle, setCurrTitle] = useState(title);
-    const [currTags, setCurrTags] = useState(tags);
-    const [currText, setCurrText] = useState(text);
-    const [currImg, setCurrImg] = useState(img);
-    const [sourceHighlight, setSourceHighlight] = useState(highlight);
-
-    const [newTitle, setNewTitle] = useState(title);
-    const [newTags, setNewTags] = useState(tags);
-    const [newText, setNewText] = useState(text);
-    const [newImg, setNewImg] = useState(img);
-    const [webHighlight, setWebHighlight] = useState(highlight)
 
     const [loading, setLoading] = useState(0)
     const [tagClass, setTagClass] = useState(false);
 
-    const [titleErr, setTitleErr] = useState(false);
-    const [tagsErr, setTagsErr] = useState(false);
-    const [textErr, setTextErr] = useState(false);
-    const [imgErr, setImgErr] = useState(false);
+
+    const setHighlight = (curr) => setNewPost({...newPost, highlight: !curr});
+    const setNewImg = (newImg) => setNewPost({...newPost, img: newImg});
+    const setPromptRemove = (val) => setPrompts({...prompts, remove: val})
+
 
     const dispatch = useDispatch();
     let postsNumber = useSelector(state => state.postsNumber)
@@ -65,21 +53,19 @@ const Post = ({
     },[textareaResizer, editor])
 
     const verifyPost = () => {
-        let pass = true;
-
-        if (newTitle < 5) {setTitleErr(true); pass = false}
-        else {setTitleErr(false)}
-
-        if (newText < 30) {setTextErr(true); pass = false}
-        else {setTextErr(false)}
-
-        if (newTags.length < 1) {setTagsErr(true); pass = false }
-        else {setTagsErr(false)}
-
-        if (!newImg.includes('https://firebasestorage.googleapis.com/v0/b/shortech')) {setImgErr(true); pass = false }
-        else {setImgErr(false)}
-
-        return pass
+        const imgChck = 'https://firebasestorage.googleapis.com/v0/b/shortech';
+        const errors = {...errorsMsg}
+        newPost.title.length < 5 ? errors.title = true : errors.title = false;
+        newPost.text.length < 30 ? errors.text = true : errors.text = false;
+        newPost.tags.length < 1 ? errors.tags = true : errors.tags = false;
+        !newPost.img.includes(imgChck) ? errors.img = true : errors.img = false;
+        setErrorsMsg(errors)
+        for (let msg in errors) {
+            if (errors[msg] === true) {
+                return false;
+            }
+        }
+        return true;
     }
 
     const modifyButtons = (e) => {
@@ -93,28 +79,31 @@ const Post = ({
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
         (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
-        setPromptAlert(false);
-        setPromptRemove(false);
+        setPrompts({...prompts, alert: false, remove: false})
         if (createPost) {
             addNew()
         } else {
-            setNewTitle(currTitle);
-            setNewText(currText);
-            setNewTags(currTags);
-            setNewImg(currImg);
-            setWebHighlight(sourceHighlight)
+            setNewPost({
+                title: currPost.title,
+                text: currPost.text,
+                tags: currPost.tags,
+                img: currPost.img,
+                highlight: currPost.highlight,
+            })
         }
     }
 
     const updateHTML = (e) => {
-        setSourceHighlight(webHighlight)
-        setCurrTitle(newTitle);
-        setCurrTags(newTags);
-        setCurrText(newText);
-        setCurrImg(newImg);
+
+        setCurrPost({
+            title: newPost.title,
+            text: newPost.text,
+            tags: newPost.tags,
+            img: newPost.img,
+            highlight: newPost.highlight,
+        })
         modifyButtons(e);
-        setPromptAlert(false);
-        setPromptRemove(false);
+        setPrompts({...prompts, alert:false, remove: false})
         if (createPost && isLogged) {
             window.location.reload();
         }
@@ -122,11 +111,11 @@ const Post = ({
 
     const pushToFirebase = (e) => {
         const postObj = {
-            title: newTitle,
-            tags: newTags,
-            text: newText,
-            img: newImg,
-            highlight: webHighlight,
+            title: newPost.title,
+            tags: newPost.tags,
+            text: newPost.text,
+            img: newPost.img,
+            highlight: newPost.highlight,
             isNew: createPost
         }
         if (createPost) {
@@ -155,7 +144,7 @@ const Post = ({
 
     const pushToDemo = (e) => {
         if (createPost) {
-            setPromptDemo(true);
+            setPrompts({...prompts, demo: true})
         } else {
             updateHTML(e);
         }
@@ -173,7 +162,7 @@ const Post = ({
                     pushToDemo(e)
                 }
             } else {
-                setPromptAlert(true);
+                setPrompts({...prompts, alert: true})
             }
         }
     };
@@ -189,28 +178,24 @@ const Post = ({
 
     return (
         <>
-            <div className={classNames(postClass, {'highlighted': webHighlight})}>
+            <div className={classNames(postClass, {'highlighted': newPost.highlight})}>
                 <div className='post-wrapper'>
-                <PostContent editor={editor} date={date} createPost={createPost}
-                             currTitle={currTitle} newTitle={newTitle} setNewTitle={setNewTitle}
-                             currTags={currTags} newTags={newTags} setNewTags={setNewTags}
-                             tagClass={tagClass} setTagClass={setTagClass}
-                             currText={currText} newText={newText} setNewText={setNewText}
+                <PostContent currPost={currPost} newPost={newPost} setNewPost={setNewPost}
+                             editor={editor} createPost={createPost}
+                             date={currPost.date} tagClass={tagClass} setTagClass={setTagClass}
                              setEndIndicator={setEndIndicator}/>
 
-                <PostImage img={newImg}
+                <PostImage img={newPost.img}
                            editor={editor}
                            loading={loading}
-                           webHighlight={webHighlight}
-                           setWebHighlight={setWebHighlight}/>
+                           highlight={newPost.highlight}
+                           setHighlight={setHighlight}/>
 
                 </div>
 
                 {(isLogged || isDemo) &&
-                <PostButtons id={id}
-                             editor={editor}
+                <PostButtons id={id} editor={editor} editBtn={editBtn}
                              saveEditedPost={saveEditedPost}
-                             editBtn={editBtn}
                              setPromptRemove={setPromptRemove}
                              loadImg={loadImg} isDemo={isDemo}
                              createPost={createPost}/>}
@@ -219,11 +204,9 @@ const Post = ({
                 <i className="fas fa-times-circle fa-lg cancel"
                    onClick={cancelEdition}/>}
 
-                {(promptAlert || promptRemove || promptDemo) &&
-                <PromptSection id={id} promptAlert={promptAlert} isDemo={isDemo}
-                               promptRemove={promptRemove} setPromptRemove={setPromptRemove}
-                               titleErr={titleErr} tagsErr={tagsErr}
-                               textErr={textErr} imgErr={imgErr} promptDemo={promptDemo}/>}
+                {(prompts.alert || prompts.remove || prompts.demo) &&
+                <PromptSection id={id} isDemo={isDemo} errorsMsg={errorsMsg}
+                               prompts={prompts} setPromptRemove={setPromptRemove}/>}
             </div>
         </>
     );

@@ -5,7 +5,7 @@ import {db} from "../../firebase";
 import {useDispatch, useSelector} from "react-redux";
 
 
-const PromptRemove = ({setPromptRemove, id, isDemo}) => {
+const PromptRemove = ({id, setPromptRemove, isDemo}) => {
 
     const dispatch = useDispatch();
     let postsNumber = useSelector(state => state.postsNumber);
@@ -17,7 +17,7 @@ const PromptRemove = ({setPromptRemove, id, isDemo}) => {
 
     const removePost = (e) => {
         e.preventDefault();
-        let current = e.target.parentElement.parentElement.parentElement.parentElement
+        let current = e.target.parentElement.parentElement.parentElement.parentElement;
         current.style.display = 'none';
         if (!isDemo) {
             deleteFromFirebase(id)

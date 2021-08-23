@@ -2,25 +2,18 @@ import React, {useState, useEffect} from 'react';
 import Tag from "./Tag";
 import classNames from "classnames";
 
-const PostContentEditor = ({
-                               newTitle, setNewTitle,
-                               newTags, setNewTags,
-                               newText, setNewText,
-                               tagClass, setTagClass
-                           }) => {
-
-
+const PostContentEditor = ({newPost, setNewPost,tagClass, setTagClass}) => {
     const [tagActivator, setTagActivator] = useState(false);
     const [tagToAdd, setTagToAdd] = useState('');
 
     const changeTitle = (e) => {
-        e.target.style.height = e.target.scrollHeight + 'px'
-        setNewTitle(e.target.value)
+        e.target.style.height = e.target.scrollHeight + 'px';
+        setNewPost({...newPost, title:e.target.value});
     };
 
     const changeText = (e) => {
         e.target.style.height = e.target.scrollHeight + 'px'
-        setNewText(e.target.value)
+        setNewPost({...newPost, text:e.target.value})
     };
 
     // Tags actions
@@ -31,8 +24,8 @@ const PostContentEditor = ({
 
     const deleteTag = (e) => {
         const out = e.target.innerHTML
-        const arr = newTags.filter((tag) => tag !== out)
-        setNewTags(arr);
+        const arr = newPost.tags.filter((tag) => tag !== out)
+        setNewPost({...newPost, tags:arr})
     }
 
     const addTag = () => {
@@ -44,8 +37,10 @@ const PostContentEditor = ({
             checker.forEach(tag => {
                 const unspaceTag = tag.replace(/\s{2,}/g, ' ')
                 const clearTag = unspaceTag.trim();
-                if (!newTags.includes(clearTag) && clearTag.length>0) {
-                    setNewTags(tags => [...tags, clearTag])
+                if (!newPost.tags.includes(clearTag) && clearTag.length>0) {
+                    const newTags = [...newPost.tags, clearTag];
+                    setNewPost({...newPost, tags:newTags});
+
                 }
             })
         }
@@ -71,12 +66,12 @@ const PostContentEditor = ({
                 <div className="post-editor-header">
                     <textarea
                            class='post-editor-title'
-                           value={newTitle}
+                           value={newPost.title}
                            onChange={e=>changeTitle(e)} is="auto-size"/>
                 </div>
                 <div className="tags">
-                    {newTags.map((tag, idx) => {
-                        return <Tag key={newTitle+tag+idx}
+                    {newPost.tags.map((tag, idx) => {
+                        return <Tag key={newPost.title+tag+idx}
                                     tag={tag}
                                     idx={idx}
                                     edit={true}
@@ -92,7 +87,7 @@ const PostContentEditor = ({
                     </div>
                 </div>
                 <textarea className='post-editor-text'
-                          value={newText}
+                          value={newPost.text}
                           onChange={e=>changeText(e)} is="auto-size"/>
             </form >
 

@@ -15,13 +15,10 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
     const dispatch = useDispatch();
 
     let postsList = useSelector(state => state.sortedPosts.posts);
-    let postsNumber = useSelector(state => state.postNumber);
+    let postsNumber = useSelector(state => state.postsNumber);
     let lastPost = useSelector(state => state.lastPost);
     let sortedTagPosts = useSelector(state => state.sortedTagPosts)
-    let keyTag = useSelector(state => state.tagSelected.tag);
-    let dateSelect = useSelector(state => state.tagSelected.isDate);
-   // let {isDate, tag: asd} = useSelector({tag} => state.tagSelected);
-
+    let {tag: keyTag, isDate: dateSelect} = useSelector(state => state.tagSelected)
 
     const addNew = () => {
         setNewPost(!newPost);
@@ -63,37 +60,20 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                 <section className='content-section'>
 
                     {(newPost && (isLogged || isDemo)) &&
-                    <Post title={''}
-                          text={''}
-                          img={''}
-                          tags={[]}
-                          highlight={''}
-                          createPost={true}
-                          editorClass={'Zapisz'}
-                          isLogged={isLogged}
-                          isDemo={isDemo}
-                          addNew={addNew}/>}
+                    <Post post={{title: '',text:'', img: '', tags: [], highlight:''}}
+                          createPost={true} editorClass={'Zapisz'}
+                          isLogged={isLogged} isDemo={isDemo} addNew={addNew}/>}
 
                     {postsList.length ? postsList.map((post) => {
-                            const {title, text, img, tags, highlight, date} = post[1];
                             const id = post[0];
-                            const sortedTags = tags.sort();
+                            const sortedTags = post[1].tags.sort();
+                            const setPost = {...post[1], tags: sortedTags}
                             if (!isLoaded) {setIsLoaded(true)}
                             return (
-                                <Post key={id}
-                                      id={id}
-                                      title={title}
-                                      text={text}
-                                      img={img}
-                                      tags={sortedTags}
-                                      highlight={highlight}
-                                      date={date}
-                                      createPost={false}
-                                      editorClass ={"Edytuj"}
+                                <Post key={id} id={id} post={setPost}
+                                      createPost={false} editorClass ={"Edytuj"}
                                       setEndIndicator={setEndIndicator}
-                                      isLogged={isLogged}
-                                      isDemo={isDemo}
-                                      changeControl={postsList}/>
+                                      isLogged={isLogged} isDemo={isDemo}/>
                             )
                         })
                     : <></>}
