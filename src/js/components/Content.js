@@ -64,14 +64,14 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                           createPost={true} editorClass={'Zapisz'}
                           isLogged={isLogged} isDemo={isDemo} addNew={addNew}/>}
 
-                    {postsList.length ? postsList.map((post) => {
+                    {postsList.length ? postsList.map(post => {
                             const id = post[0];
                             const sortedTags = post[1].tags.sort();
                             const setPost = {...post[1], tags: sortedTags}
                             if (!isLoaded) {setIsLoaded(true)}
                             return (
                                 <Post key={id} id={id} post={setPost}
-                                      createPost={false} editorClass ={"Edytuj"}
+                                      editorClass ={"Edytuj"}
                                       setEndIndicator={setEndIndicator}
                                       isLogged={isLogged} isDemo={isDemo}/>
                             )

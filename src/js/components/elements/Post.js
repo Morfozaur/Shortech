@@ -16,7 +16,7 @@ import classNames from "classnames";
 const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLogged, isDemo}) => {
 
     const [editor, setEditor] = useState(false);
-    const [postClass, setPostClass] = useState('post');
+    const [postClassEditor, setPostClassEditor] = useState(false);
     const [editBtn, setEditBtn] = useState(editorClass);
     const [textareaResizer, setTextareaResizer] = useState('');
 
@@ -41,7 +41,7 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
     useEffect(()=> {
         if(createPost) {
             setEditor(true);
-            setPostClass('post in-editor');
+            setPostClassEditor(true);
         }
     },[createPost])
 
@@ -59,11 +59,9 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
         newPost.text.length < 30 ? errors.text = true : errors.text = false;
         newPost.tags.length < 1 ? errors.tags = true : errors.tags = false;
         !newPost.img.includes(imgChck) ? errors.img = true : errors.img = false;
-        setErrorsMsg(errors)
+        setErrorsMsg(errors);
         for (let msg in errors) {
-            if (errors[msg] === true) {
-                return false;
-            }
+            if (errors[msg] === true) {return false;}
         }
         return true;
     }
@@ -71,14 +69,14 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
     const modifyButtons = (e) => {
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
-        (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post')
+        setPostClassEditor(prev=>!prev)
         setTextareaResizer(e.target.parentElement.parentElement);
     };
 
     const cancelEdition = () => {
         setEditor(!editor);
         (editBtn === 'Edytuj') ? setEditBtn('Zapisz') : setEditBtn('Edytuj');
-        (postClass === 'post') ? setPostClass('post in-editor') : setPostClass('post');
+        setPostClassEditor(prev=>!prev);
         setPrompts({...prompts, alert: false, remove: false})
         if (createPost) {
             addNew()
@@ -94,7 +92,6 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
     }
 
     const updateHTML = (e) => {
-
         setCurrPost({
             title: newPost.title,
             text: newPost.text,
@@ -115,14 +112,13 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
             tags: newPost.tags,
             text: newPost.text,
             img: newPost.img,
-            highlight: newPost.highlight,
-            isNew: createPost
+            highlight: newPost.highlight
         }
         if (createPost) {
             postObj.date = customDate();
             createInFirebase(postObj)
                 .then(()=> {
-                    updateHTML(e);
+                    updateHTML(e, post);
                     postsNumber += 1;
                     dispatch(fetchPostsNumber(postsNumber));
                     const updateNumber = db.collection('count').doc('posts');
@@ -178,7 +174,7 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
 
     return (
         <>
-            <div className={classNames(postClass, {'highlighted': newPost.highlight})}>
+            <div className={classNames('post',{'in-editor': postClassEditor}, {'highlighted': newPost.highlight})}>
                 <div className='post-wrapper'>
                 <PostContent currPost={currPost} newPost={newPost} setNewPost={setNewPost}
                              editor={editor} createPost={createPost}
