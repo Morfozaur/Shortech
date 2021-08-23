@@ -172,7 +172,7 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
         if (isLogged) {
             uploadImg(e, setLoading, setNewImg);
         } else if (isDemo) {
-            setNewImg(randomImg)
+            setNewImg(randomImg())
         }
     };
 
