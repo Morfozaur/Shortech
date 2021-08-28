@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import firebase from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {fetchDemo} from "../../redux/actions/allFetchers";
@@ -9,12 +9,12 @@ const LoginForm = () => {
     const [pass, setPass] = useState('');
 
     const history = useHistory();
-    const auth = firebase.auth();
+    const auth = getAuth();
     const dispatch = useDispatch();
 
-    const logMe = async (e) => {
+    const logMe =  (e) => {
         e.preventDefault();
-        await auth.signInWithEmailAndPassword(user, pass)
+        signInWithEmailAndPassword(auth, user, pass)
             .then( () => history.push('/'))
             .catch((err) => console.error(err.message))
     }

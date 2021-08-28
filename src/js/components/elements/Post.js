@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {db} from "../../firebase";
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
 import classNames from "classnames";
+import {setDoc, doc} from "firebase/firestore";
 
 const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLogged, isDemo}) => {
 
@@ -121,8 +122,7 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
                     updateHTML(e, post);
                     postsNumber += 1;
                     dispatch(fetchPostsNumber(postsNumber));
-                    const updateNumber = db.collection('count').doc('posts');
-                    updateNumber.set({number: postsNumber});
+                    setDoc(doc(db, 'count', 'posts'), {number: postsNumber})
                 })
                 .catch(err => {
                     console.error(err)
