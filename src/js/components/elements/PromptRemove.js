@@ -3,6 +3,7 @@ import {deleteFromFirebase} from "../../firebaseFunc";
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
 import {db} from "../../firebase";
 import {useDispatch, useSelector} from "react-redux";
+import {doc, setDoc} from "firebase/firestore";
 
 
 const PromptRemove = ({id, setPromptRemove, isDemo}) => {
@@ -24,8 +25,7 @@ const PromptRemove = ({id, setPromptRemove, isDemo}) => {
                 .then(()=> {
                     postsNumber -= 1;
                     dispatch(fetchPostsNumber(postsNumber));
-                    const updateNumber = db.collection('count').doc('posts');
-                    updateNumber.set({number: postsNumber});
+                    setDoc(doc(db, 'count', 'posts'), {number: postsNumber});
                 })
                 .catch((err) => console.error(err))
 

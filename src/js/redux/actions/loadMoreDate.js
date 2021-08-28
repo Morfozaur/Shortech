@@ -1,13 +1,13 @@
 import {db} from "../../firebase";
 import {fetchError, fetchLastPost, fetchPosts} from "./allFetchers";
+import {collection, getDocs, limit, orderBy, query, startAfter} from "firebase/firestore";
 
 const loadMoreDate = (lastState, postsList, postsNumber, setEndIndicator) => {
-    return (dispatch) => {
-        db.collection('articles')
-            .orderBy('date', 'desc')
-            .startAfter(lastState)
-            .limit(4)
-            .get()
+    return async (dispatch) => {
+
+        const artRef = collection(db, 'articles')
+        const sorted = query(artRef, orderBy('date', 'desc'), startAfter(lastState),  limit(4));
+        await getDocs(sorted)
             .then(res => {
                 const resLength = res.docs.length;
                 if (resLength > 0) {
@@ -24,7 +24,6 @@ const loadMoreDate = (lastState, postsList, postsNumber, setEndIndicator) => {
             .catch(err => {
                 dispatch(fetchError(err.message))
             })
-
     }
 };
 

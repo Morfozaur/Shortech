@@ -1,13 +1,14 @@
 import {db} from "../../firebase";
+import { collection, query,where, getDocs } from "firebase/firestore";
 import {fetchError, fetchPosts, fetchTagArr, fetchTagArrLength} from "./allFetchers";
 import {customSort} from "../../customSort";
 import {tagListLimiter} from "../../tagListLimiter";
 
 const listByTag = (key, setEndIndicator) => {
-    return (dispatch) => {
-        db.collection('articles')
-            .where('tags', 'array-contains', key)
-            .get()
+    return async (dispatch) => {
+        const artRef = collection(db, 'articles')
+        const sorted = query(artRef, where('tags', 'array-contains', key));
+        await getDocs(sorted)
             .then(res => {
                 setEndIndicator(false)
                 const allTaggedPosts = customSort(res);
