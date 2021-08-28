@@ -1,36 +1,42 @@
+import { setDoc, addDoc, deleteDoc, doc, collection } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {db} from "./firebase";
-import firebase from "./firebase";
 import {randomizeName} from "./randomizeName";
+
+const metadata = {
+    contentType: 'image/jpeg'
+};
 
 // Edit functions
 
 const updateInFirebase = async (id, post) => {
-    const fetchedPost = db.collection('articles').doc(id);
-    await fetchedPost.update(post);
+    await setDoc(doc(db, 'articles', id), post)
 };
 
 const createInFirebase = async (post) => {
-    await db.collection('articles').add(post);
+    await addDoc(collection(db, 'articles'), post)
 };
 
 const deleteFromFirebase = async (id) => {
-    await db.collection('articles').doc(id).delete()
+    await deleteDoc(doc(db, 'articles', id))
         .catch(err => {console.error(err)})
 };
 
 const uploadImg = (e, setLoading, setNewImg) => {
     const file = e.target.files[0];
     const fileName = randomizeName(file.name);
-    const storageRef = firebase.storage().ref('img/' + fileName);
-    const task = storageRef.put(file);
-    task.on('stage_changed',
+    const storage = getStorage();
+    const fileRef = ref(storage, 'img/' + fileName);
+    const uploadTask = uploadBytesResumable(fileRef, file, metadata);
+
+    uploadTask.on('stage_changed',
         (snapshot) => {
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setLoading(percentage.toFixed(2));
         },
         (error) =>{console.error(error.message)},
         () =>{
-            task.snapshot.ref.getDownloadURL().then((url) => {
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                 setNewImg(url);
             });
         }

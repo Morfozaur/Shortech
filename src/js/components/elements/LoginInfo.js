@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
 import {fetchDemo} from "../../redux/actions/allFetchers";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -8,9 +8,16 @@ const LoginInfo = ({isDemo}) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const auth = getAuth();
+
     const logout = () => {
-        firebase.auth().signOut().catch(err => console.error(err.message));
-        dispatch(fetchDemo(false));
+        signOut(auth)
+            .then(()=> {
+                dispatch(fetchDemo(false))
+            })
+            .catch((err) => {
+                console.error(err.message)
+        });
     };
     return (
         <div className='login-status'>
