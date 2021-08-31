@@ -71,7 +71,7 @@ const Content = ({endIndicator, setEndIndicator, isLogged, isDemo}) => {
                             if (!isLoaded) {setIsLoaded(true)}
                             return (
                                 <Post key={id} id={id} post={setPost}
-                                      editorClass ={"Edytuj"}
+                                      editorClass ={"Edytuj"} createPost={false}
                                       setEndIndicator={setEndIndicator}
                                       isLogged={isLogged} isDemo={isDemo}/>
                             )
