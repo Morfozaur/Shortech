@@ -178,7 +178,7 @@ const Post = ({id, post, createPost, editorClass, addNew, setEndIndicator, isLog
                 <div className='post-wrapper'>
                 <PostContent currPost={currPost} newPost={newPost} setNewPost={setNewPost}
                              editor={editor} createPost={createPost}
-                             date={currPost.date} tagClass={tagClass} setTagClass={setTagClass}
+                             tagClass={tagClass} setTagClass={setTagClass}
                              setEndIndicator={setEndIndicator}/>
 
                 <PostImage img={newPost.img}
