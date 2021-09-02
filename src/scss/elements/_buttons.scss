@@ -29,8 +29,10 @@
     }
   }
   &.deactive {
-    background-color: $color-third;
-    border-color: $color-third;
+    cursor: auto;
+    background-color: $color-third-dark;
+    border-color: $color-third-dark;
+    color: $color-third;
     &:active {
       transform: none;
     }
