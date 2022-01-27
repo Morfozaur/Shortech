@@ -9,11 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {fetchLog} from "../redux/actions/allFetchers";
 import Footer from "./Footer";
 import About from "./About";
-<<<<<<< HEAD
 import {firebaseApp} from "../firebaseConfig";
-=======
-import {firebaseApp} from "../firebase";
->>>>>>> 0b51efad0d4ae903e221db712472f1b8cbe05f65
 
 function App() {
     const [endIndicator, setEndIndicator] = useState(false);
