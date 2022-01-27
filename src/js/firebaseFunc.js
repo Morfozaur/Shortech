@@ -1,10 +1,6 @@
 import { setDoc, addDoc, deleteDoc, doc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-<<<<<<< HEAD
 import {db} from "./firebaseConfig";
-=======
-import {db} from "./firebase";
->>>>>>> 0b51efad0d4ae903e221db712472f1b8cbe05f65
 import {randomizeName} from "./randomizeName";
 
 const metadata = {

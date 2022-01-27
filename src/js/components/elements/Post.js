@@ -9,11 +9,7 @@ import PostContent from "./PostContent";
 import PromptSection from "./PromptSection";
 import {randomImg} from "../../randomImg";
 import {useDispatch, useSelector} from "react-redux";
-<<<<<<< HEAD
 import {db} from "../../firebaseConfig";
-=======
-import {db} from "../../firebase";
->>>>>>> 0b51efad0d4ae903e221db712472f1b8cbe05f65
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
 import classNames from "classnames";
 import {setDoc, doc} from "firebase/firestore";
