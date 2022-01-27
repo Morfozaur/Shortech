@@ -1,14 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import 'dotenv/config';
 
 const config = {
-    apiKey: "AIzaSyC_VJpU_qZQBVzuYv7KrxT_Xpx5OsVZSjs",
-    authDomain: "shortech-de128.firebaseapp.com",
-    projectId: "shortech-de128",
-    storageBucket: "shortech-de128.appspot.com",
-    messagingSenderId: "607104988245",
-    appId: "1:607104988245:web:8c3f20a6cd9957dc0e90dc",
-    measurementId: "G-LVW54QGVDZ"
+    apiKey: process.env.REACT_APP_DB_API,
+    authDomain: process.env.REACT_APP_DB_DOMAIN,
+    projectId: process.env.REACT_APP_DB_ID,
+    storageBucket: process.env.REACT_APP_DB_BUCKET,
+    messagingSenderId: process.env.REACT_APP_DB_SENDER,
+    appId: process.env.REACT_APP_DB_APP_ID,
+    measurementId: process.env.REACT_APP_DB_MEASURE
 };
 const firebaseApp = initializeApp(config);
 const db = getFirestore();
