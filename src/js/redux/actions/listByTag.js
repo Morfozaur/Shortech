@@ -1,4 +1,4 @@
-import {db} from "../../firebase";
+import {db} from "../../firebaseConfig";
 import { collection, query,where, getDocs } from "firebase/firestore";
 import {fetchError, fetchPosts, fetchTagArr, fetchTagArrLength} from "./allFetchers";
 import {customSort} from "../../customSort";
