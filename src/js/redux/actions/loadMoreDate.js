@@ -1,4 +1,4 @@
-import {db} from "../../firebase";
+import {db} from "../../firebaseConfig";
 import {fetchError, fetchLastPost, fetchPosts} from "./allFetchers";
 import {collection, getDocs, limit, orderBy, query, startAfter} from "firebase/firestore";
 

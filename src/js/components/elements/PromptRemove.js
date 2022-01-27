@@ -1,7 +1,7 @@
 import React from 'react';
 import {deleteFromFirebase} from "../../firebaseFunc";
 import {fetchPostsNumber} from "../../redux/actions/allFetchers";
-import {db} from "../../firebase";
+import {db} from "../../firebaseConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {doc, setDoc} from "firebase/firestore";
 

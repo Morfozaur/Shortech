@@ -9,7 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {fetchLog} from "../redux/actions/allFetchers";
 import Footer from "./Footer";
 import About from "./About";
-import {firebaseApp} from "../firebase";
+import {firebaseApp} from "../firebaseConfig";
 
 function App() {
     const [endIndicator, setEndIndicator] = useState(false);
