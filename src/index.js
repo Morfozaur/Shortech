@@ -8,8 +8,6 @@ import thunk from "redux-thunk";
 import {allReducers} from "./js/redux/reducers/allReducers";
 import 'dotenv/config';
 
-console.log(process.env)
-
 class AutoSize extends HTMLTextAreaElement {
     constructor() {
         super();
